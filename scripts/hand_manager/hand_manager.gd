@@ -15,8 +15,12 @@ const CARD_UI = preload("uid://cunj3kh5og6dc")
 
 func _ready() -> void:
 	Events.card_previewed.connect(_on_card_previewed)
+	Events.card_drag_started.connect(
+	func(_card_ui): set_cards() 
+		)
 	for child: CardUI in get_children():
 		child.reparent_requested.connect(_on_card_ui_reparent_requested)
+		child.parent = self
 	set_cards()
 
 func add_card(card: Card) -> void:
@@ -84,8 +88,9 @@ func _on_card_previewed(pre_card: CardUI, to_preview: bool) -> void:
 		var element :int = to_preview as int
 		for card_ui: CardUI in get_children():
 			var movement = sign(card_ui.original_index - pre_card.original_index) * element * offset
+			#card_ui.animate_to_position(card_ui.original_position + Vector2(movement, 0), tween_time)
 			var tween := get_tree().create_tween()
-			#tween.set_parallel(true)
+			tween.set_parallel(true)
 			tween.tween_property(card_ui, "position:x", card_ui.original_position.x + movement, tween_time)
 
 func discard_card(card: CardUI) -> void:

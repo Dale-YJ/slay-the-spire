@@ -18,6 +18,7 @@ var original_position: Vector2
 var original_rotation: float
 
 var parent : Control
+var tween: Tween
 
 # 在dragging/aiming下，卡牌会脱离handmanger
 @warning_ignore("unused_signal")
@@ -32,6 +33,26 @@ func _ready() -> void:
 
 func play() -> void:
 	pass
+	
+func animate_to_position(new_position: Vector2, duration: float) -> void:
+	tween = create_tween().set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", new_position, duration)
+
+func animate_start_preview() -> void:
+	tween = create_tween().set_trans(Tween.TRANS_SINE).set_parallel(true)
+	tween.tween_property(self, "position:y", original_position.y - 175, 0.2).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "scale", Vector2(1.3, 1.3), 0.2)
+	tween.tween_property(self, "rotation_degrees", 0, 0.2).set_trans(Tween.TRANS_SINE)
+
+func animate_end_preview() -> void:
+	tween = create_tween().set_trans(Tween.TRANS_SINE).set_parallel(true)
+	tween.tween_property(self, "position:y", original_position.y, 0.2).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+	tween.tween_property(self, "rotation_degrees", original_rotation, 0.2).set_trans(Tween.TRANS_SINE)
+
+func animate_scale(to: Vector2, duration: float) -> void:
+	tween = create_tween()
+	tween.tween_property(self, "scale", to, duration)
 
 func _input(event: InputEvent) -> void:
 	card_state_machine.on_input(event)
