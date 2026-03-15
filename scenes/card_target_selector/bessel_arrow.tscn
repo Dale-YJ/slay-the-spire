@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c6ny5utfdu6gc"]
+
+[ext_resource type="Script" uid="uid://78s5cjqm072u" path="res://scripts/card_target_selector/bessel_arrow.gd" id="1_7rihi"]
+
+[node name="BesselArrow" type="Node2D" unique_id=1586285059]
+script = ExtResource("1_7rihi")

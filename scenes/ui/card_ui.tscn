@@ -14,14 +14,32 @@
 [ext_resource type="Script" uid="uid://c5ciu1i21f7tn" path="res://scripts/hand_manager/card_state_machine/card_aiming_state.gd" id="12_i2e1o"]
 [ext_resource type="Script" uid="uid://deyslpu2jebj4" path="res://scripts/hand_manager/card_state_machine/card_released_state.gd" id="13_pvsb8"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0og8s"]
+size = Vector2(300, 422)
+
 [node name="CardUI" type="Control" unique_id=883918395]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 422.0
+pivot_offset = Vector2(150, 211)
 script = ExtResource("1_s55cg")
+
+[node name="DropPointArea" type="Area2D" parent="." unique_id=1533357214]
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DropPointArea" unique_id=1795295555]
+position = Vector2(150, 211)
+shape = SubResource("RectangleShape2D_0og8s")
 
 [node name="Visuals" type="Control" parent="." unique_id=1490993169]
 layout_mode = 1
 anchors_preset = 0
+offset_left = 150.0
+offset_top = 211.0
+offset_right = 150.0
+offset_bottom = 211.0
 mouse_filter = 2
 
 [node name="CardPortrait" type="TextureRect" parent="Visuals" unique_id=749964796]
@@ -37,6 +55,7 @@ offset_right = 125.0
 offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_im7p3")
 
 [node name="CardFrame" type="TextureRect" parent="Visuals" unique_id=724728824]
@@ -52,6 +71,7 @@ offset_right = 150.0
 offset_bottom = 211.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_5rjcn")
 expand_mode = 1
 stretch_mode = 4
@@ -66,6 +86,7 @@ offset_top = -169.0
 offset_right = 137.5
 offset_bottom = 41.0
 grow_horizontal = 2
+mouse_filter = 2
 texture = ExtResource("3_fke5x")
 expand_mode = 1
 stretch_mode = 4
@@ -83,6 +104,7 @@ offset_right = 164.0
 offset_bottom = -118.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("4_im7p3")
 expand_mode = 1
 stretch_mode = 4
@@ -107,6 +129,7 @@ offset_left = -165.0
 offset_top = -221.0
 offset_right = -101.0
 offset_bottom = -157.0
+mouse_filter = 2
 texture = ExtResource("5_7cyci")
 expand_mode = 1
 stretch_mode = 4
@@ -162,6 +185,7 @@ offset_left = -122.0
 offset_top = 37.0
 offset_right = 121.0
 offset_bottom = 173.0
+mouse_filter = 2
 bbcode_enabled = true
 text = "[center]造成6点伤害[/center]"
 scroll_active = false
@@ -169,10 +193,11 @@ vertical_alignment = 1
 
 [node name="Debug" type="Control" parent="." unique_id=679281035]
 anchors_preset = 0
-offset_left = -21.0
-offset_top = 43.0
-offset_right = 19.0
-offset_bottom = 83.0
+offset_left = 124.0
+offset_top = 266.0
+offset_right = 164.0
+offset_bottom = 306.0
+mouse_filter = 2
 
 [node name="StateLabel" type="Label" parent="Debug" unique_id=1534182082]
 layout_mode = 0
@@ -205,3 +230,9 @@ state = 3
 [node name="CardReleasedState" type="Node" parent="CardStateMachine" unique_id=1367157191]
 script = ExtResource("13_pvsb8")
 state = 4
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="area_entered" from="DropPointArea" to="." method="_on_drop_point_area_area_entered"]
+[connection signal="area_exited" from="DropPointArea" to="." method="_on_drop_point_area_area_exited"]

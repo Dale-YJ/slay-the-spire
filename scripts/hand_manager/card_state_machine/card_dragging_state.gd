@@ -1,1 +1,41 @@
 extends CardState
+
+const DRAG_MININUM_THRESHHOLD := 0.05
+var minimum_drag_time_elapsed := false
+var offset : Vector2
+
+func enter_state() -> void:
+	card_ui.state_label.text = "DRAGGING"
+	var ui_layer := get_tree().get_first_node_in_group("ui_layer")
+	if ui_layer:
+		card_ui.reparent(ui_layer)
+	offset = card_ui.get_global_mouse_position() - card_ui.global_position
+	Events.card_drag_started.emit(card_ui)
+	minimum_drag_time_elapsed = false
+	var threshhold_timer := get_tree().create_timer(DRAG_MININUM_THRESHHOLD, false)
+	threshhold_timer.timeout.connect(
+		func(): minimum_drag_time_elapsed = true
+	)
+
+func exit_state() -> void:
+	Events.card_drag_ended.emit(card_ui)
+	card_ui.drop_point_area.monitoring = false
+
+func on_input(event: InputEvent) -> void:
+	var single_targetd := card_ui.card.is_single_targetd()
+	var mouse_motion := event is InputEventMouseMotion
+	var cancel := event.is_action_pressed("right_mouse")
+	# 点击后再点击释放，拖拽后释放
+	var comfirm := event.is_action_pressed("left_mouse") or event.is_action_released("left_mouse")
+	
+	if single_targetd and mouse_motion and card_ui.targets.size() > 0:
+		card_state_machine_change_state_requested.emit(self, STATE.AIMING)
+		return
+	
+	if mouse_motion:
+		card_ui.global_position = card_ui.get_global_mouse_position() - offset
+	elif cancel:
+		card_state_machine_change_state_requested.emit(self, STATE.BASE)
+	elif minimum_drag_time_elapsed and comfirm:
+		get_viewport().set_input_as_handled()
+		card_state_machine_change_state_requested.emit(self, STATE.RELEASED)

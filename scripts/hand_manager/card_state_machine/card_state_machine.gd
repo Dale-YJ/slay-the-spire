@@ -11,10 +11,10 @@ extends Node
 var states: Dictionary[CardState.STATE, CardState]
 var current_state: CardState: set = _set_card_state
 
-func _ready() -> void:
+func init() -> void:
 	# card_ui会比状态机后加载，进行等待
-	if not card_ui.is_node_ready():
-		await card_ui.ready
+	#if not card_ui.is_node_ready():
+		#await card_ui.ready
 	# 注册状态
 	for child: CardState in get_children():
 		if child is CardState:
@@ -22,7 +22,7 @@ func _ready() -> void:
 			child.card_state_machine_change_state_requested.connect(_on_card_state_machine_change_state_requested)
 			states[child.state] = child
 		if initial_state:
-			initial_state.enter()
+			initial_state.enter_state()
 			current_state = initial_state
 
 func on_mouse_entered() -> void:
@@ -55,9 +55,5 @@ func _on_card_state_machine_change_state_requested(from: CardState, to: CardStat
 		printerr("状态机出错")
 		return
 	
-	if current_state:
-		current_state.exit_state()
-	
-	new_state.enter()
 	current_state = new_state
 	
