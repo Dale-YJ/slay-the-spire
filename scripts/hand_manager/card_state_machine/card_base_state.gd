@@ -14,7 +14,7 @@ func enter_state() -> void:
 	original_card_position = card_ui.global_position
 
 func on_gui_input(event: InputEvent) -> void:
-	if card_ui.disabled or not card_ui.playable:
+	if card_ui.disabled:
 		return
 	if event.is_action_pressed("left_mouse"):
 		card_state_machine_change_state_requested.emit(self, STATE.CLICKED)

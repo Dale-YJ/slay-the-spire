@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dpde6spa48hlj" path="res://scripts/costum_resources/character_stats.gd" id="15_82is4"]
 [ext_resource type="Texture2D" uid="uid://jwynhqw8ayou" path="res://images/packed/combat_ui/end_turn_button.png" id="16_82is4"]
 [ext_resource type="Script" uid="uid://cqlaav8vqwmad" path="res://scripts/player/player_handler.gd" id="16_bf0xi"]
+[ext_resource type="Script" uid="uid://bgjydn1xm3hu4" path="res://scripts/enemy/enemy_handler.gd" id="16_og13y"]
 [ext_resource type="Resource" uid="uid://bdt85ngfibtet" path="res://entities/enemies/leaf_slime_m/leaf_slime_m.tres" id="17_82is4"]
 [ext_resource type="Texture2D" uid="uid://bnnrjotxgq0sx" path="res://images/packed/combat_ui/end_turn_button_glow.png" id="17_og13y"]
 
@@ -168,7 +169,10 @@ position = Vector2(959, 310)
 shape = SubResource("RectangleShape2D_vujjl")
 metadata/_edit_lock_ = true
 
-[node name="Enemy" parent="." unique_id=934959197 instance=ExtResource("12_jnfh8")]
+[node name="EnemyHandler" type="Node2D" parent="." unique_id=385461736]
+script = ExtResource("16_og13y")
+
+[node name="Enemy" parent="EnemyHandler" unique_id=934959197 instance=ExtResource("12_jnfh8")]
 position = Vector2(1434, 459)
 stats = ExtResource("17_82is4")
 

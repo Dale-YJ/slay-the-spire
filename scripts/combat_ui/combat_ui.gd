@@ -24,4 +24,4 @@ func _on_player_hand_drawn() -> void:
 func _on_end_turn_button_pressed() -> void:
 	end_turn.disabled = true
 	end_turn_glow.visible = false
-	Events.turn_ended.emit()
+	Events.player_turn_ended.emit()

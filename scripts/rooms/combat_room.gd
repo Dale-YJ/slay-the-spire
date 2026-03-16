@@ -15,7 +15,7 @@ func _ready() -> void:
 	hand_manager.char_stats = new_stats
 	player.stats = new_stats
 	
-	Events.turn_ended.connect(player_handler.end_turn)
+	Events.player_turn_ended.connect(player_handler.end_turn)
 	# 暂时的
 	Events.player_hand_discarded.connect(player_handler.start_turn)
 	

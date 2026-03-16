@@ -9,9 +9,13 @@
 
 [node name="AttackAction" type="Node" parent="." index="0" unique_id=241746270]
 script = ExtResource("2_uyiru")
+type = 1
+weight = 2.0
 
 [node name="AttackBlockAction" type="Node" parent="." index="1" unique_id=1255205288]
 script = ExtResource("3_0vsok")
+type = 1
+weight = 1.0
 
 [node name="MegaAttackAction" type="Node" parent="." index="2" unique_id=1348560572]
 script = ExtResource("4_e5hhr")

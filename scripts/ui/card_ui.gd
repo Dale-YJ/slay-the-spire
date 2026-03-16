@@ -1,6 +1,15 @@
 class_name CardUI
 extends Control
 
+const CARD_PORTRAIT_BORDER_ATTACK_S = preload("uid://0o70qg")
+const CARD_PORTRAIT_BORDER_POWER_S = preload("uid://0bx41p")
+const CARD_PORTRAIT_BORDER_SKILL_S = preload("uid://rgdrpx")
+
+const CARD_FRAME_ATTACK_S = preload("uid://cslfj7h")
+const CARD_FRAME_POWER_S = preload("uid://d8j0tw")
+const CARD_FRAME_SKILL_S = preload("uid://cwvw75o")
+
+
 @export var card: Card: set = _set_card
 # 暂时
 @export var char_stats: CharacterStats: set = _set_char_stats
@@ -9,10 +18,12 @@ extends Control
 @onready var card_state_machine: CardStateMachine = $CardStateMachine
 @onready var visuals: Control = $Visuals
 @onready var card_portrait: TextureRect = %CardPortrait
+@onready var portrait_border: TextureRect = %PortraitBorder
 @onready var card_frame: TextureRect = %CardFrame
 @onready var title_label: Label = %TitleLabel
 @onready var energy_label: Label = %EnergyLabel
 @onready var type_label: Label = %TypeLabel
+@onready var description_label: RichTextLabel = %DescriptionLabel
 
 var disabled: bool = false : set = _set_playable
 var playable: bool = true
@@ -80,16 +91,23 @@ func _set_card(value: Card) -> void:
 	card_portrait.texture = card.portrait
 	title_label.text = card.id
 	energy_label.text = str(card.cost)
+	description_label.text = card.description
 	var type_text: String
 	# TODO: 诅咒，状态
 	# TODO: 根据类型修改卡牌外观
 	match card.type:
 		card.Type.ATTACK:
 			type_text = "攻击"
+			card_frame.texture = CARD_FRAME_ATTACK_S
+			portrait_border.texture = CARD_PORTRAIT_BORDER_ATTACK_S
 		card.Type.SKILL:
 			type_text = "技能"
+			card_frame.texture = CARD_FRAME_SKILL_S
+			portrait_border.texture = CARD_PORTRAIT_BORDER_SKILL_S
 		card.Type.POWER:
 			type_text = "能力"
+			card_frame.texture = CARD_FRAME_POWER_S
+			portrait_border.texture = CARD_PORTRAIT_BORDER_POWER_S
 		_:
 			type_text = "出错"
 			

@@ -13,7 +13,8 @@ signal card_played(card: Card)
 # 玩家回合开始抽牌后
 signal player_hand_drawn
 signal player_hand_discarded
-signal turn_ended
+signal player_turn_ended
+signal player_hited(text: String)
 ## 敌人相关
 signal  enemy_action_completed(enemy: Enemy)
 @warning_ignore_restore("unused_signal")

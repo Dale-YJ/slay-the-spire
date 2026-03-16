@@ -3,8 +3,24 @@ extends Node2D
 
 @export var stats: CharacterStats : set = _set_char_stats
 
+@onready var hint_sprite: TextureRect = $Hint
+@onready var hint_lable: Label = $Hint/HintLable
 @onready var spine_manager: SpineManager = $SpineManager
 @onready var health_bar: HealthBar = $HealthBar
+@onready var hint_timer: Timer = $Timer
+
+
+
+func _ready() -> void:
+	Events.player_hited.connect(_hint)
+	hint_timer.timeout.connect(
+		func(): hint_sprite.visible = false
+	)
+
+func _hint(hint_text: String) -> void:
+	hint_sprite.visible = true
+	hint_lable.text = hint_text
+	hint_timer.start(2.5)
 
 func take_damage(damage: int) -> void:
 	if stats.health <= 0:

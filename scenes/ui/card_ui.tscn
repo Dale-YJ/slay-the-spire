@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cunj3kh5og6dc"]
 
 [ext_resource type="Script" uid="uid://p5t5ynm0gru3" path="res://scripts/ui/card_ui.gd" id="1_s55cg"]
+[ext_resource type="Texture2D" uid="uid://w1mk8x" path="res://images/atlases/card_atlas.sprites/ironclad/strike_ironclad.tres" id="2_0og8s"]
 [ext_resource type="Script" uid="uid://n32cyhvf6qam" path="res://scripts/hand_manager/card_state_machine/card_state_machine.gd" id="2_1kpl7"]
-[ext_resource type="Texture2D" uid="uid://cv2t58jc3h2gy" path="res://images/atlas/card_template_atlas/card_frame_attack.tres" id="2_5rjcn"]
-[ext_resource type="Texture2D" uid="uid://b8sa7qho8t24c" path="res://images/atlas/card_portrait_atlas/ironclad/打击.tres" id="2_im7p3"]
-[ext_resource type="Texture2D" uid="uid://b8fx3ghsehpyo" path="res://images/atlas/card_template_atlas/card_portrait_attack.tres" id="3_fke5x"]
-[ext_resource type="Texture2D" uid="uid://c0kofvxadxtwk" path="res://images/atlas/card_template_atlas/card_banner.tres" id="4_im7p3"]
-[ext_resource type="Texture2D" uid="uid://bya30mv1ksmgy" path="res://images/atlas/card_template_atlas/card_type_plaque.tres" id="4_vk10k"]
-[ext_resource type="Texture2D" uid="uid://dvxq0bcqtlfn8" path="res://images/atlas/card_template_atlas/energy_icon_ironclad.tres" id="5_7cyci"]
+[ext_resource type="Texture2D" uid="uid://cslfj7h" path="res://images/atlases/ui_atlas.sprites/card/card_frame_attack_s.tres" id="3_2u763"]
+[ext_resource type="Texture2D" uid="uid://0o70qg" path="res://images/atlases/ui_atlas.sprites/card/card_portrait_border_attack_s.tres" id="4_i2e1o"]
+[ext_resource type="Texture2D" uid="uid://qmqejd" path="res://images/atlases/ui_atlas.sprites/card/card_banner.tres" id="5_pvsb8"]
+[ext_resource type="Texture2D" uid="uid://g1g8kd" path="res://images/atlases/ui_atlas.sprites/card/energy_ironclad.tres" id="6_bubx5"]
+[ext_resource type="Texture2D" uid="uid://bduvy6u" path="res://images/atlases/ui_atlas.sprites/card/card_portrait_border_plaque_s.tres" id="7_rn6lq"]
 [ext_resource type="Script" uid="uid://r1hpyjdc572v" path="res://scripts/hand_manager/card_state_machine/card_base_state.gd" id="9_7cyci"]
 [ext_resource type="Script" uid="uid://h66064xnout6" path="res://scripts/hand_manager/card_state_machine/card_clicked_state.gd" id="10_0og8s"]
 [ext_resource type="Script" uid="uid://b3itqlw4pv3ga" path="res://scripts/hand_manager/card_state_machine/card_dragging_state.gd" id="11_2u763"]
@@ -50,14 +50,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -176.0
-offset_right = 125.0
-offset_bottom = 14.0
+offset_left = -127.0
+offset_top = -167.0
+offset_right = 123.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_im7p3")
+texture = ExtResource("2_0og8s")
 
 [node name="CardFrame" type="TextureRect" parent="Visuals" unique_id=724728824]
 unique_name_in_owner = true
@@ -74,22 +74,23 @@ offset_bottom = 211.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_5rjcn")
+texture = ExtResource("3_2u763")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="PortraitBorder" type="TextureRect" parent="Visuals" unique_id=72130813]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -137.5
-offset_top = -169.0
-offset_right = 137.5
-offset_bottom = 41.0
+offset_left = -139.0
+offset_top = -167.0
+offset_right = 136.0
+offset_bottom = 43.0
 grow_horizontal = 2
 mouse_filter = 2
-texture = ExtResource("3_fke5x")
+texture = ExtResource("4_i2e1o")
 expand_mode = 1
 stretch_mode = 4
 
@@ -100,28 +101,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -163.0
-offset_top = -201.0
-offset_right = 164.0
-offset_bottom = -118.0
+offset_left = -159.0
+offset_top = -214.0
+offset_right = 168.0
+offset_bottom = -131.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_im7p3")
+texture = ExtResource("5_pvsb8")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="TitleLabel" type="Label" parent="Visuals/TitleBanner" unique_id=924373933]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_top = 4.0
-offset_right = 20.0
-offset_bottom = 27.0
+anchor_bottom = 0.5
+offset_left = -24.5
+offset_top = -23.5
+offset_right = 7.5
+offset_bottom = -0.5
 grow_horizontal = 2
+grow_vertical = 2
 text = "打击"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -133,7 +137,7 @@ offset_top = -221.0
 offset_right = -101.0
 offset_bottom = -157.0
 mouse_filter = 2
-texture = ExtResource("5_7cyci")
+texture = ExtResource("6_bubx5")
 expand_mode = 1
 stretch_mode = 4
 
@@ -161,7 +165,7 @@ offset_left = -30.0
 offset_top = -2.0
 offset_right = 31.0
 offset_bottom = 35.0
-texture = ExtResource("4_vk10k")
+texture = ExtResource("7_rn6lq")
 patch_margin_left = 13
 patch_margin_top = 5
 patch_margin_right = 13
@@ -185,6 +189,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DescriptionLabel" type="RichTextLabel" parent="Visuals" unique_id=1953267051]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = -122.0
 offset_top = 37.0

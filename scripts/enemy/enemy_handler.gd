@@ -1,0 +1,2 @@
+class_name EnemyHandler
+extends Node2D
