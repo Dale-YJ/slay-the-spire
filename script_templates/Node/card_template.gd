@@ -1,3 +1,7 @@
+# meta-name: 卡牌逻辑
+# meta-description: 卡牌逻辑脚本的模板
+
+class_name MyCard
 extends Card
 
 func apply_effects(targets) -> void:

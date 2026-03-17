@@ -30,9 +30,9 @@ func take_damage(damage: int) -> void:
 	var hurt := stats.take_damage(damage)
 	
 	if stats.health <= 0:
+		health_bar.hide()
 		Events.player_died.emit()
 		spine_anim_state.set_animation("die", false, 0)
-		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	elif hurt:
 		Events.player_hit.emit()
 		spine_anim_state.set_animation("hurt", false, 0)

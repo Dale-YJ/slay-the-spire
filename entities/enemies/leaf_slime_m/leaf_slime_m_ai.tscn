@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://byip6ctv4gdr5"]
 
-[ext_resource type="PackedScene" uid="uid://b06w3uca3vj26" path="res://scenes/enemy/enemy_intent_picker.tscn" id="1_mgtwb"]
+[ext_resource type="PackedScene" uid="uid://b06w3uca3vj26" path="res://entities/enemies/enemy_intent_picker.tscn" id="1_mgtwb"]
 [ext_resource type="Script" uid="uid://cpiu2ss1wfos0" path="res://entities/enemies/leaf_slime_m/attack_action.gd" id="2_uyiru"]
 [ext_resource type="Script" uid="uid://d4n2wao2k18as" path="res://entities/enemies/leaf_slime_m/attack_block_action.gd" id="3_0vsok"]
 [ext_resource type="Script" uid="uid://ce34juwu5b0yr" path="res://scripts/costum_resources/intent_ui.gd" id="3_e5hhr"]
