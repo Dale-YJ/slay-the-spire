@@ -43,10 +43,12 @@ var movement_tween: Tween
 signal reparent_requested(card_ui: CardUI)
 
 func _ready() -> void:
-	Events.card_aim_started.connect(_on_card_drag_or_aiming_started)
-	Events.card_aim_ended.connect(_on_card_drag_or_aiming_ended)
-	Events.card_drag_started.connect(_on_card_drag_or_aiming_started)
-	Events.card_drag_ended.connect(_on_card_drag_or_aiming_ended)
+	Events.card_aim_started.connect(_on_card_click_or_drag_or_aiming_started)
+	Events.card_aim_ended.connect(_on_card_click_or_drag_or_aiming_ended)
+	Events.card_click_started.connect(_on_card_click_or_drag_or_aiming_started)
+	Events.card_click_ended.connect(_on_card_click_or_drag_or_aiming_ended)
+	Events.card_drag_started.connect(_on_card_click_or_drag_or_aiming_started)
+	Events.card_drag_ended.connect(_on_card_click_or_drag_or_aiming_ended)
 	card_state_machine.init()
 
 func play() -> void:
@@ -139,16 +141,31 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered() -> void:
 	card_state_machine.on_mouse_entered()
+	Events.tooltip_show_request.emit(self)
+	
+func show_keyword_tooltip() -> void:
+	var keywords = KeywordTooltip.extract_keyword(card.description)
+	if keywords.is_empty():
+		return
+	for keyword:String in keywords:
+		var keyword_name := BuffLibrary.get_keyword_name(keyword)
+		var desc := BuffLibrary.get_keyword_description(keyword)
+		KeywordTooltip.add_keyword(keyword_name, desc)
+	# TODO: 应与卡牌并列
+	# preview时会scale到1.3，同时向上移动175px(显示tooltip需要0.2s,此时tween已经完成)
+	KeywordTooltip.global_position = global_position + Vector2(size.x * 1.4, 0)
+	KeywordTooltip.show()
 
 func _on_mouse_exited() -> void:
 	card_state_machine.on_mouse_exited()
-
-func _on_card_drag_or_aiming_started(card_ui: CardUI) -> void:
+	Events.tooltip_hide_request.emit()
+	
+func _on_card_click_or_drag_or_aiming_started(card_ui: CardUI) -> void:
 		if card_ui == self:
 			return
 		disabled = true
 		
-func _on_card_drag_or_aiming_ended(_card_ui: CardUI) -> void:
+func _on_card_click_or_drag_or_aiming_ended(_card_ui: CardUI) -> void:
 	disabled = false
 	self.playable = char_stats.can_play_card(card)
 

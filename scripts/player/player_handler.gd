@@ -33,6 +33,9 @@ func draw_card() -> void:
 	if char_stats.draw_pile.is_empty():
 		# 抽牌堆与弃牌堆都没牌了
 		return
+	if hand_manager.get_child_count() >= 10:
+		# 手牌满了
+		return
 	hand_manager.add_card(char_stats.draw_pile.draw_card())
 	hand_manager.set_cards()
 	reshuffle_deck_from_discard_pile()

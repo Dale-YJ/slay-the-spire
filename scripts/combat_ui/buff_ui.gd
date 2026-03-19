@@ -21,8 +21,8 @@ func _on_buff_removed() -> void:
 
 func _on_mouse_entered():
 	if buff:
-		TooltipManager.show_tooltip(buff.get_description())
+		KeywordTooltip.show()
 
 func _on_mouse_exited():
 	if buff:
-		TooltipManager.hide_tooltip()
+		KeywordTooltip.hide()
