@@ -18,6 +18,7 @@ script = ExtResource("3_54fe1")
 id = "灵动步伐"
 type = 2
 cost = 1
+rarity = 1
 portrait = ExtResource("2_54fe1")
 description = "[center]获得{dexterity}点敏捷[/center]"
 sound = ExtResource("4_lsigb")

@@ -18,6 +18,7 @@ script = ExtResource("3_61fru")
 id = "燃烧"
 type = 2
 cost = 1
+rarity = 1
 portrait = ExtResource("2_61fru")
 description = "[center]获得{strength}点力量[/center]"
 sound = ExtResource("4_61fru")
