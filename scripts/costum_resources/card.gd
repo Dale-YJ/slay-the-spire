@@ -5,6 +5,8 @@ extends Resource
 enum Type {ATTACK, SKILL, POWER}
 # 卡牌目标类型
 enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
+# 卡牌稀有度
+enum Rarity {COMMON, UNCOMMON, RARE}
 
 ## TODO: 使用表格而不是使用资源文件存储数据
 @export_group("卡牌属性")
@@ -13,6 +15,7 @@ enum Target {SELF, SINGLE_ENEMY, ALL_ENEMIES, EVERYONE}
 @export var target: Target
 # TODO: X费
 @export var cost: int
+@export var rarity: Rarity
 @export_group("卡牌描述")
 @export var portrait: Texture
 @export_multiline var description: String
