@@ -34,13 +34,17 @@ func _ready() -> void:
 			_start_run()
 		RunStartup.Type.CONTINUE_RUN:
 			print("加载游戏")
+	
+func _start_run() -> void:
+	_setup_event_connections()
+	_setup_top_bar()
+	# TODO: 生成地图
+
+func _setup_top_bar() -> void:
 	deck_view.card_pile = character.deck
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 
-func _start_run() -> void:
-	_setup_event_connections()
-	# TODO: 生成地图
 
 func _change_view(scene: PackedScene) -> void:
 	if current_room.get_child_count() > 0:
