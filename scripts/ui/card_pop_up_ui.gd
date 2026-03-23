@@ -1,7 +1,5 @@
-class_name CardMenuUI
 extends CenterContainer
 
-signal inspect_card_requested(card: Card)
 
 const CARD_PORTRAIT_BORDER_ATTACK_S = preload("res://images/atlases/ui_atlas.sprites/card/card_portrait_border_attack_s.tres")
 const CARD_PORTRAIT_BORDER_POWER_S = preload("res://images/atlases/ui_atlas.sprites/card/card_portrait_border_power_s.tres")
@@ -19,31 +17,14 @@ const CARD_FRAME_SKILL_S = preload("res://images/atlases/ui_atlas.sprites/card/c
 @onready var energy_label: Label = %EnergyLabel
 @onready var type_label: Label = %TypeLabel
 @onready var description_label: RichTextLabel = %DescriptionLabel
-@onready var visuals: Control = $CardMenuUI/Visuals
-
 
 var tween: Tween
 
 @export var card: Card: set = _set_card
 
-
-func _on_visuals_mouse_entered() -> void:
-	if tween: 
-		tween.kill()
-	tween = create_tween().set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(self, "scale", Vector2(1.2, 1.2), 0.1)
-
-
-func _on_visuals_mouse_exited() -> void:
-	if tween:
-		tween.kill()
-	tween = create_tween().set_trans(Tween.TRANS_SPRING)
-	tween.tween_property(self, "scale", Vector2.ONE, 0.2)
-	
-func _on_visuals_gui_input(event: InputEvent) -> void:
-	pass # Replace with function body.
-
 func _set_card(value: Card) -> void:
+	if not value:
+		return
 	if not is_node_ready():
 		await ready
 	

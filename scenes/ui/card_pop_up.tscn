@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://ciqc4fkeeetw0"]
 
+[ext_resource type="Script" uid="uid://hpqpdu16q5ie" path="res://scripts/ui/card_pop_up.gd" id="1_b2j5q"]
 [ext_resource type="Texture2D" uid="uid://b4ffylh" path="res://images/atlases/ui_atlas.sprites/settings_tiny_left_arrow.tres" id="1_y7n4m"]
 [ext_resource type="PackedScene" uid="uid://uxv6ncqktd1c" path="res://scenes/ui/card_menu_ui.tscn" id="2_1v3rr"]
+[ext_resource type="Script" uid="uid://c78mq5564tdhk" path="res://scripts/ui/card_pop_up_ui.gd" id="3_1v3rr"]
 [ext_resource type="Texture2D" uid="uid://kjsi4o" path="res://images/atlases/ui_atlas.sprites/settings_tiny_right_arrow.tres" id="3_b2j5q"]
+[ext_resource type="Resource" uid="uid://objfyia1a4gs" path="res://entities/characters/ironclad/cards/突破.tres" id="5_a2vsi"]
 
 [node name="CardPopUp" type="Control" unique_id=302635351]
 layout_mode = 3
@@ -11,6 +14,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_b2j5q")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1894838826]
 layout_mode = 1
@@ -36,8 +41,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 50
 
-[node name="Button" type="Button" parent="HBoxContainer" unique_id=1592742284]
+[node name="LeftButtonContainer" type="Control" parent="HBoxContainer" unique_id=1438265313]
+custom_minimum_size = Vector2(109, 120)
 layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/LeftButtonContainer" unique_id=1592742284]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -68.0
+offset_right = 136.0
+offset_bottom = 68.0
+grow_vertical = 2
 icon = ExtResource("1_y7n4m")
 flat = true
 
@@ -52,9 +68,21 @@ offset_top = 84.0
 offset_right = 297.5
 offset_bottom = 419.0
 scale = Vector2(1.5, 1.5)
-script = null
+script = ExtResource("3_1v3rr")
+card = ExtResource("5_a2vsi")
 
-[node name="Button2" type="Button" parent="HBoxContainer" unique_id=1493460903]
+[node name="RightButtonContainer" type="Control" parent="HBoxContainer" unique_id=1210935373]
+custom_minimum_size = Vector2(109, 120)
 layout_mode = 2
+
+[node name="Button2" type="Button" parent="HBoxContainer/RightButtonContainer" unique_id=1493460903]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -68.0
+offset_right = 136.0
+offset_bottom = 68.0
+grow_vertical = 2
 icon = ExtResource("3_b2j5q")
 flat = true
