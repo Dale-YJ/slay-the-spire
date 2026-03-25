@@ -93,8 +93,8 @@ var keyword_info = {
 
 func get_keyword_description(key: String) -> String:
 	return keyword_info.get(key, {}).get("description", "")
+	
 # 一般来说key和name是相同的，这里不考虑多语言
-
 func get_keyword_name(key: String) -> String:
 	return keyword_info.get(key, {}).get("name", "")
 

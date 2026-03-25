@@ -55,8 +55,23 @@ func disable_hand() -> void:
 	for child:CardUI in hand_manager.get_children():
 		child.disabled = true
 
-func discard_card(card_ui:CardUI) -> void:
-	pass
+func discard_card(card: Card) -> void:
+	for child: CardUI in hand_manager.get_children():
+		if card == child.card:
+			hand_manager.discard_card(child)
+			char_stats.discard_pile.add_card(card)
+			return
+	printerr("player_handler")
+
+
+func exhaust_card(card: Card) -> void:
+	for child: CardUI in hand_manager.get_children():
+		if card == child.card:
+			hand_manager.exhaust_card(child)
+			char_stats.exhaust_pile.add_card(card)
+			return
+	printerr("player_handler")
+
 
 func discard_cards() -> void:
 	var tween := create_tween()
@@ -72,6 +87,20 @@ func discard_cards() -> void:
 		func(): Events.player_hand_discarded.emit()
 	)
 
+func hide_hand() -> void:
+	print("hide")
+	hand_manager.hide()
+	
+func show_hand() -> void:
+	print("show")
+	hand_manager.show()
+	
+func get_hand() -> Array[Card]:
+	var ret: Array[Card] = []
+	for child: CardUI in hand_manager.get_children():
+		ret.append(child.card)
+	return ret
+	
 func reshuffle_deck_from_discard_pile() -> void:
 	if not char_stats.draw_pile.is_empty():
 		return
