@@ -61,7 +61,11 @@ func discard_card(card_ui:CardUI) -> void:
 func discard_cards() -> void:
 	var tween := create_tween()
 	for child: CardUI in hand_manager.get_children():
-		tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
+		if child.card.ethereal:
+			tween.tween_callback(char_stats.exhaust_pile.add_card.bind(child.card))
+			#TODO:卡片消耗特效
+		else:
+			tween.tween_callback(char_stats.discard_pile.add_card.bind(child.card))
 		tween.tween_callback(hand_manager.discard_card.bind(child))
 		tween.tween_interval(HAND_DISCARD_INTERVAL)
 	tween.finished.connect(
@@ -78,6 +82,9 @@ func reshuffle_deck_from_discard_pile() -> void:
 	char_stats.draw_pile.shuffle()
 
 func _on_card_played(card: Card) -> void:
+	if card.type == card.Type.POWER:
+		# 能力牌打出后不进入任何牌堆
+		return
 	if card.exhaust:
 		char_stats.exhaust_pile.add_card(card)
 	else:
