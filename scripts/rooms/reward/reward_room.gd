@@ -127,6 +127,6 @@ func _get_random_available_card(available_cards:Array[Card],with_rarity:Card.Rar
 func _on_card_reward_taken(card:Card)->void:
 	if not character_stats or not card:
 		return
-	print("DeckBefore:\n%s\n" % character_stats.deck)
+	#print("DeckBefore:\n%s\n" % character_stats.deck)
 	character_stats.deck.add_card(card)
-	print("DeckAfter:\n%s" % character_stats.deck)
+	#print("DeckAfter:\n%s" % character_stats.deck)

@@ -53,8 +53,8 @@ func _start_run() -> void:
 	# TODO: 生成地图
 	
 	#debug
-	await get_tree().create_timer(3).timeout
-	stats.gold += 55
+	#await get_tree().create_timer(3).timeout
+	#stats.gold += 55
 
 func _setup_top_bar() -> void:
 	deck_view.card_pile = character.deck
