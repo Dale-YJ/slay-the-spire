@@ -48,6 +48,7 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 		var base_value := entry.base_value
 		var modifiers := []
 		match entry.affected_by:
+			# 这里感觉有问题
 			NumericEntry.AFFECTED_BY.SELF:
 				modifiers = source_.get_modifiers_by_type(entry.type, Buff.AFFECT.SELF)
 			NumericEntry.AFFECTED_BY.TARGET:

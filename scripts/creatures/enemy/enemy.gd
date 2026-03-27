@@ -28,7 +28,7 @@ func _ready() -> void:
 
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
-	stats.block += context.amount
+	stats.block += context.get_final_value()
 
 func do_turn() -> void:
 	start_turn()
@@ -136,7 +136,7 @@ func take_damage(context: Context) -> void:
 	if stats.health <= 0:
 		return
 	
-	var hurt := stats.take_damage(context.amount)
+	var hurt := stats.take_damage(context.get_final_value())
 	
 	if stats.health <= 0:
 		die()

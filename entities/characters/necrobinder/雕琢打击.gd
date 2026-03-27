@@ -4,9 +4,8 @@ extends Card
 
 func apply_effects(context: Context) -> void:
 	var damage_effect := DamageEffect.new()
-	context.amount = 7
 	damage_effect.sound = sound
-	damage_effect.execute(context)
+	damage_effect.execute(DamageContext.new(context.source, context.targets, 7))
 	
 	var source: Player = context.source
 	var choose_card_effect := ChooseCardEffect.new()

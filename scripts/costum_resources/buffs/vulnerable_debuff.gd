@@ -27,7 +27,7 @@ func get_modifier() -> Array[Modifier]:
 	return [modifier]
 
 func _on_before_take_damage(context: Context) -> void:
-	context.amount = int(context.amount * 1.5)
+	context.modifiers.append(Modifier.new(Enums.NumericType.DAMAGE, 0, 1.5, null))
 
 func _on_turn_started(_creature: Node2D) -> void:
 	remove_stack(1) 
