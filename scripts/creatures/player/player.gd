@@ -42,6 +42,7 @@ func select(context: ChooseCardContext) -> void:
 		selected = await hand_selector.single_select(context.cards as Array[Card], context.title)
 	for card: Card in selected:
 		context.callback.call(card)
+	agent.update_hand()
 	agent.disable_hand(false)
 	agent.show_hand()
 		

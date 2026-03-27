@@ -5,11 +5,18 @@
 [ext_resource type="Script" uid="uid://d1sfqu2pct7s3" path="res://entities/characters/ironclad/cards/燃烧.gd" id="3_61fru"]
 [ext_resource type="AudioStream" uid="uid://dbe46o0jyq2x8" path="res://audio/SFX/dark_orb_channel.mp3" id="4_61fru"]
 
-[sub_resource type="Resource" id="Resource_4ko5v"]
+[sub_resource type="Resource" id="Resource_61fru"]
 script = ExtResource("1_qbqqq")
 type = 4
 base_value = 2
-placeholder = "strength"
+placeholder = "stacks"
+affected_by = 3
+metadata/_custom_type_script = "uid://cxgxfbwykbp84"
+
+[sub_resource type="Resource" id="Resource_4ko5v"]
+script = ExtResource("1_qbqqq")
+base_value = 3
+placeholder = "stacks"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
@@ -17,10 +24,13 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 script = ExtResource("3_61fru")
 id = "燃烧"
 type = 2
-cost = 1
+base_cost = 1
 rarity = 1
 portrait = ExtResource("2_61fru")
-description = "[center]获得{strength}点[color=gold]力量[/color]。[/center]"
+base_description = "[center]获得{stacks}层[color=gold]力量[/color]。[/center]"
 sound = ExtResource("4_61fru")
-numeric_entries = Array[ExtResource("1_qbqqq")]([SubResource("Resource_4ko5v")])
+base_numeric_entries = Array[ExtResource("1_qbqqq")]([SubResource("Resource_61fru")])
+upgraded_cost = 1
+upgraded_description = "[center]获得{stacks}层[color=gold]力量[/color]。[/center]"
+upgraded_numeric_entries = Array[ExtResource("1_qbqqq")]([SubResource("Resource_4ko5v")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

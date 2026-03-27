@@ -91,12 +91,12 @@ func discard_cards() -> void:
 	)
 
 func hide_hand() -> void:
-	print("hide")
 	hand_manager.hide()
 	
 func show_hand() -> void:
-	print("show")
+	hand_manager.set_cards(true)
 	hand_manager.show()
+	
 	
 func get_hand() -> Array[Card]:
 	var ret: Array[Card] = []
@@ -122,6 +122,9 @@ func put_card_in_draw_pile(card: Card, top: bool = false) -> void:
 
 func put_card_in_discard_pile(card: Card) -> void:
 	char_stats.discard_pile.add_card(card)
+
+func update_hand() -> void:
+	hand_manager.update_hand()
 
 func _on_card_played(card: Card) -> void:
 	if card.type == card.Type.POWER:

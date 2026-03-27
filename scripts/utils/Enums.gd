@@ -6,6 +6,7 @@ enum NumericType {
 	BLOCK,
 	HEAL,
 	BUFF_STACKS,
+	DRAW_CARDS,
 	OTHERS
 }
 # 卡牌的选择状态

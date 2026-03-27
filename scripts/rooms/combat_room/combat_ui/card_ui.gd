@@ -4,7 +4,7 @@ extends Control
 # 处理选择卡牌逻辑
 signal toggled(card: CardUI)
 
-@export var card: Card: set = _set_card
+@export var card: Card: set = set_card
 @export var char_stats: CharacterStats: set = _set_char_stats
 
 @onready var drop_point_area: Area2D = $DropPointArea
@@ -123,7 +123,7 @@ func _set_char_stats(value: CharacterStats) -> void:
 	char_stats = value
 	char_stats.stats_changed.connect(_on_char_stats_changed)
 
-func _set_card(value: Card) -> void:
+func set_card(value: Card) -> void:
 	if not is_node_ready():
 		await ready
 	
@@ -155,9 +155,9 @@ func _on_mouse_entered() -> void:
 		return
 	if selection_mode == Enums.SelectionMode.NONE:
 		card_state_machine.on_mouse_entered()
-		if card.target == card.Target.SELF or card.target == card.Target.SINGLE_ENEMY:
+		if card.get_target() == card.Target.SELF or card.get_target() == card.Target.SINGLE_ENEMY:
 			set_description(get_tree().get_first_node_in_group("ui_player"), null)
-		elif card.target == card.Target.EVERYONE or card.target == card.Target.ALL_ENEMIES:
+		elif card.get_target() == card.Target.EVERYONE or card.get_target() == card.Target.ALL_ENEMIES:
 			set_description(get_tree().get_first_node_in_group("ui_player"), get_tree().get_first_node_in_group("ui_enemies"))
 	else:
 		Events.card_previewed.emit(self, true)

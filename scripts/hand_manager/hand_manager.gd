@@ -152,3 +152,8 @@ func _on_card_ui_reparent_requested(card_ui:CardUI) -> void:
 		move_child.call_deferred(card_ui, card_ui.original_index)
 		card_ui.set_deferred("disabled", false)
 		set_cards.call_deferred()
+
+func update_hand() -> void:
+	for child: CardUI in get_children():
+		child.set_card(child.card)
+		

@@ -29,7 +29,7 @@ func reset_energy() -> void:
 	energy = max_energy
 	
 func can_play_card(card: Card) -> bool:
-	return energy >= card.cost
+	return energy >= card.get_cost()
 
 func create_instance() -> CharacterStats:
 	var instance := self.duplicate()

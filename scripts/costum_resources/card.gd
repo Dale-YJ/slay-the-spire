@@ -24,27 +24,34 @@ enum COLOR {
 ## 卡牌类型
 @export var type: Type
 ## 目标类型
-@export var target: Target
+@export var base_target: Target
 ## 卡牌属于那个角色池，详情见COLOR枚举
 @export var card_color: COLOR
 # TODO: X费
-@export var cost: int
+@export var base_cost: int
 @export var rarity: Rarity
 @export_group("卡牌描述")
 @export var portrait: Texture
-@export_multiline var description: String
+@export_multiline var base_description: String
 @export var sound: AudioStream
-@export var numeric_entries: Array[NumericEntry]
+@export var base_numeric_entries: Array[NumericEntry]
 # 注意这两个可以动态生成的词条不能在卡牌描述中写死
 # 是否带“消耗“词条
 @export var exhaust: bool
 # 是否带”虚无“词条
 @export var ethereal: bool
+# 升级后
+@export_group("升级后")
+@export var upgraded_target: Target
+@export var upgraded_cost: int
+@export_multiline var upgraded_description: String
+@export var upgraded_numeric_entries: Array[NumericEntry]
+@export var upgraded: bool = false
 
 
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	var ret = {}
-	for entry: NumericEntry in numeric_entries:
+	for entry: NumericEntry in _get_numeric_entries():
 		var base_value := entry.base_value
 		var modifiers := []
 		match entry.affected_by:
@@ -69,7 +76,7 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 
 func play(context: Context, char_stats: CharacterStats) -> void:
 	Events.card_played.emit(self)
-	char_stats.energy -= cost
+	char_stats.energy -= get_cost()
 	if is_single_targeted():
 		apply_effects(context)
 	else:
@@ -79,7 +86,7 @@ func apply_effects(_context: Context) -> void:
 	pass
 
 func is_single_targeted() -> bool:
-	return target == Target.SINGLE_ENEMY
+	return get_target() == Target.SINGLE_ENEMY
 
 func _get_targets(context: Context) -> Context:
 	var targets := context.targets
@@ -89,7 +96,7 @@ func _get_targets(context: Context) -> Context:
 		return context
 	# 资源没有获取场景树的方法
 	var tree := targets[0].get_tree()
-	match target:
+	match get_target():
 		Target.SELF:
 			context.targets = tree.get_nodes_in_group("ui_player")
 		Target.ALL_ENEMIES:
@@ -107,11 +114,11 @@ func get_description(source_: Creature, target_: Creature) -> String:
 	var final_value: int
 	var color: String
 	var replacement: String
-	var ret: String = description
+	var ret: String = _get_default_description()
 	for placeholder: String in numeric_dict.keys():
 		final_value = numeric_dict[placeholder]
 		replacement = str(final_value)
-		for numeric_entry in numeric_entries:
+		for numeric_entry in _get_numeric_entries():
 			if numeric_entry.placeholder == placeholder:
 				if numeric_entry.base_value == final_value:
 					continue
@@ -126,9 +133,12 @@ func get_description(source_: Creature, target_: Creature) -> String:
 	
 func get_default_description() -> String:
 	var dict := {}
-	for entry: NumericEntry in numeric_entries:
+	for entry: NumericEntry in _get_numeric_entries():
 		dict[entry.placeholder] = entry.base_value
-	return append_features(description).format(dict)
+	return append_features(_get_default_description()).format(dict)
+
+func get_title() -> String:
+	return "[color=green]" + id + "+[/color]" if upgraded else id
 
 func append_features(desc: String) -> String:
 	if exhaust:
@@ -136,3 +146,18 @@ func append_features(desc: String) -> String:
 	if ethereal:
 		desc += "[p][center][color=gold]虚无。[/color][/center]"
 	return desc
+
+func upgrade() -> void:
+	upgraded = true
+
+func _get_numeric_entries() -> Array[NumericEntry]:
+	return upgraded_numeric_entries if upgraded else base_numeric_entries
+
+func _get_default_description() -> String:
+	return upgraded_description if upgraded else base_description
+
+func get_cost() -> int:
+	return upgraded_cost if upgraded else base_cost
+
+func get_target() -> Target:
+	return upgraded_target if upgraded else base_target
