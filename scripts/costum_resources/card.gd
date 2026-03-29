@@ -52,7 +52,7 @@ enum COLOR {
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	var ret = {}
 	for entry: NumericEntry in get_numeric_entries():
-		var base_value := entry.base_value
+		var base_value := _get_numeric_value(entry, source_)
 		var modifiers := []
 		match entry.affected_by:
 			# 这里感觉有问题
@@ -163,6 +163,7 @@ func _get_numeric_value(entry: NumericEntry, player: Player = null) -> int:
 			# 暂时没做
 			return 0
 		_:
+			print("未实现")
 			return 0
 
 func get_numeric_value(entries: Array[NumericEntry], index: int, player: Player = null) -> int:
