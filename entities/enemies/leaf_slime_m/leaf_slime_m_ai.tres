@@ -54,13 +54,13 @@ sound = ExtResource("4_ldd8u")
 metadata/_custom_type_script = "uid://iqqyr44teapg"
 
 [sub_resource type="Resource" id="Resource_7sfex"]
-script = ExtResource("8_ldd8u")
+script = ExtResource("9_nfbet")
 buff_id = "虚弱"
-type = 4
+type = 3
 icon = ExtResource("8_nfbet")
 base_value = 2
 sound = ExtResource("10_sj1l8")
-metadata/_custom_type_script = "uid://dpbv4m5rd0bbq"
+metadata/_custom_type_script = "uid://c2p6buhbk6em8"
 
 [sub_resource type="Resource" id="Resource_xkl8f"]
 script = ExtResource("1_et3dl")

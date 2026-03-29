@@ -2,7 +2,8 @@ class_name Creature
 extends Area2D
 
 @warning_ignore_start("unused_signal")
-signal turn_started(creature: Creature)
+signal before_turn_started(creature: Creature)
+signal after_turn_started(creature: Creature)
 signal turn_ended(creature: Creature)
 signal before_take_damage(context: Context)
 signal before_lose_health(context: Context)
@@ -30,10 +31,9 @@ func speech(_text: String, _time: float = 2.5) -> void:
 	pass
 
 func attack(context: Context) -> void:
-	before_attack.emit(context)
 	for child: Creature in context.targets:
 		var damage_context = DamageContext.new(self, [child], context.amount)
-		child.before_take_damage.emit(damage_context)
+		before_attack.emit(damage_context)
 		child.take_damage(damage_context)
 
 func gain_block(_context: Context) -> void:
@@ -43,6 +43,12 @@ func apply_buff(buff_context: ApplyBuffContext) -> void:
 	before_apply_buff.emit(buff_context)
 	buff_context.targets[0].add_buff(buff_context)
 	after_apply_buff.emit(buff_context)
+
+func has_buff(name: String) -> bool:
+	for child: Buff in buff_manager.get_children():
+		if child.buff_name == name:
+			return true
+	return false
 	
 func add_buff(buff_context: ApplyBuffContext) -> void:
 	before_applied_buff.emit(buff_context)
@@ -69,7 +75,8 @@ func get_modifiers_by_type(type: Enums.NumericType, affect: Buff.AFFECT) -> Arra
 	return ret
 
 func start_turn() -> void:
-	turn_started.emit(self)
+	before_turn_started.emit(self)
+	after_turn_started.emit(self)
 
 func end_turn() -> void:
 	turn_ended.emit(self)

@@ -2,7 +2,7 @@ class_name Player
 extends Creature
 
 # 玩家专属信号
-signal before_draw_card()
+signal before_draw_cards(context: DrawCardContext)
 signal after_draw_card(card: Card)
 
 
@@ -50,6 +50,8 @@ func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
 	stats.block += context.get_final_value()
 
+func get_block() -> int:
+	return stats.block
 	
 func die() -> void:
 	health_bar.hide()
@@ -59,9 +61,21 @@ func die() -> void:
 	Events.player_died.emit()
 
 func draw_card() -> void:
-	before_draw_card.emit()
 	var card: Card = agent.draw_card()
 	after_draw_card.emit(card)
+
+func draw_cards(context: DrawCardContext) -> void:
+	before_draw_cards.emit(context)
+	if context.amount > 0:
+		var tween = create_tween()
+		for i in range(context.amount):
+			tween.tween_callback(draw_card)
+			tween.tween_interval(0.2)
+		await tween.finished
+
+func gain_energy(context: GainEnergyContext) -> void:
+	stats.energy += context.amount
+	
 	
 func lose_health(context: Context) -> void:
 	if stats.health <= 0:
@@ -78,9 +92,10 @@ func lose_health(context: Context) -> void:
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 		
 func take_damage(context: Context) -> void:
+	
 	if stats.health <= 0:
 		return
-
+	before_take_damage.emit(context)
 	var hurt := stats.take_damage(context.get_final_value())
 	
 	if stats.health <= 0:
@@ -100,6 +115,22 @@ func put_card_in_draw_pile(card: Card, top:bool = false) -> void:
 func get_hand_cards() -> Array[Card]:
 	return agent.get_hand()
 
+func get_draw_pile() -> Array[Card]:
+	return stats.get_draw_pile()
+
+func get_discard_pile() -> Array[Card]:
+	return stats.get_discard_pile()
+
+func get_exhaust_pile() -> Array[Card]:
+	return stats.get_exhaust_pile()
+
+func get_card_count_by_name(name: String) -> int:
+	var all_cards: Array[Card] = get_hand_cards()
+	all_cards.append_array(get_draw_pile())
+	all_cards.append_array(get_discard_pile())
+	# 将所有卡牌加起来，用filter函数筛选出id有name字符串卡牌然后获取数组长度
+	return len(all_cards.filter(func(card: Card): card.id.contains(name)))
+
 func discard_card(card: Card) -> void:
 	agent.discard_card(card)
 	
@@ -107,7 +138,10 @@ func exhaust_card(card: Card) -> void:
 	agent.exhaust_card(card)
 
 func start_turn() -> void:
-	turn_started.emit(self)
+	before_turn_started.emit(self)
+	stats.block = 0
+	stats.energy = stats.max_energy
+	after_turn_started.emit(self)
 
 func end_turn() -> void:
 	turn_ended.emit(self)

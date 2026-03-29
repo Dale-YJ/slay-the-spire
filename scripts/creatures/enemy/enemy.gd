@@ -77,7 +77,9 @@ func _setup_ai() -> void:
 	enemy_ai = stats.ai
 	
 func start_turn() -> void:
-	turn_started.emit(self)
+	before_turn_started.emit(self)
+	stats.block = 0
+	after_turn_started.emit(self)
 
 func end_turn() -> void:
 	turn_ended.emit(self)
@@ -135,7 +137,7 @@ func lose_health(context: Context) -> void:
 func take_damage(context: Context) -> void:
 	if stats.health <= 0:
 		return
-	
+	before_take_damage.emit(context)
 	var hurt := stats.take_damage(context.get_final_value())
 	
 	if stats.health <= 0:
