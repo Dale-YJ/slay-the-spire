@@ -37,7 +37,7 @@ var stats: RunStats
 func _ready() -> void:
 	if not run_startup:
 		return
-	
+	Events.map_room_selected.connect(_on_map_room_selected)
 	match run_startup.type:
 		RunStartup.Type.NEW_RUN:
 			character = run_startup.picked_character.create_instance()
@@ -45,6 +45,39 @@ func _ready() -> void:
 		RunStartup.Type.CONTINUE_RUN:
 			print("加载游戏")
 	
+func _on_map_room_selected(room: Room) -> void:
+	# 根据房间类型选择对应的场景
+	var scene: PackedScene
+	match room.type:
+		Room.Type.MONSTER:
+			scene = COMBAT_SCENE
+		Room.Type.ELITE:
+			scene = COMBAT_SCENE   # 精英怪也是战斗
+		Room.Type.BOSS:
+			scene = COMBAT_SCENE
+		Room.Type.TREASURE:
+			scene = TREASURE_SCENE
+		Room.Type.SHOP:
+			scene = SHOP_SCENE
+		Room.Type.CAMPFIRE:
+			scene = CAMPFIRE_SCENE
+		Room.Type.UNKNOWN:
+			scene = INCIDENT_SCENE   # 事件房间
+		_:
+			return
+
+	# 切换视图
+	var new_room_node = _change_view(scene)
+	
+	# 如果是战斗房间，还需要传递敌人数据
+	#if scene == COMBAT_SCENE:
+		#var combat_room = new_room_node as CombatRoom
+		#combat_room.char_stats = character
+		## 从 room 中获取敌人生成数据（例如 room.enemy_encounter）
+		## 需要确保 Room 资源中包含了 encounter 信息
+		#combat_room.enemy_encounter = room.enemy_encounter
+		#combat_room.start_combat()
+		
 func _start_run() -> void:
 	stats = RunStats.new()
 	
@@ -73,7 +106,7 @@ func _change_view(scene: PackedScene) -> Node:
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
 	
-	# 张颢骞
+	# zhanghaoqian
 	if scene == COMBAT_SCENE:
 		# 这段应该在_on_battle_room_entered(room: Room)中实现，new_view.enemy_encounter = room.enemy_encounter
 		new_view = new_view as CombatRoom

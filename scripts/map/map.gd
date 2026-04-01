@@ -110,7 +110,7 @@ func _on_map_room_selected(room:Room) -> void:
 	floors_climbed += 1
 	
 	#test
-	#Events.map_exited.emit(room)
+	Events.map_room_selected.emit(room)
 	
 func _on_legend_highlight_requested(type: int):
 	#print("收到高亮请求，类型: ", type)

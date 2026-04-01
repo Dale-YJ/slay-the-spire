@@ -67,7 +67,7 @@ func _on_input_event(_viewport:Node, event:InputEvent, _shape_idx:int) -> void:
 		return
 	room.selected = true
 	animation_player.play("select")
-	print("clicked")
+	#print("clicked")
 	
 	
 # Called by the AnimationPLayer when the
