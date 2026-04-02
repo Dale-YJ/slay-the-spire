@@ -18,6 +18,7 @@ metadata/_edit_lock_ = true
 
 [node name="Lines" type="Node2D" parent="Visuals" unique_id=573115876]
 unique_name_in_owner = true
+z_index = -1
 metadata/_edit_lock_ = true
 
 [node name="Rooms" type="Node2D" parent="Visuals" unique_id=827458797]
@@ -37,23 +38,23 @@ act2_pool = ExtResource("3_vvrx0")
 act3_pool = ExtResource("3_vvrx0")
 
 [node name="Background" type="Node2D" parent="." unique_id=1208578723]
-z_index = -1
+z_index = -2
 metadata/_edit_lock_ = true
 
 [node name="Top" type="Sprite2D" parent="Background" unique_id=343043579]
-z_index = -1
+z_index = -2
 position = Vector2(980, -1973)
 scale = Vector2(0.6300037, 0.76119787)
 texture = ExtResource("3_jcaow")
 
 [node name="Middle" type="Sprite2D" parent="Background" unique_id=499505033]
-z_index = -1
+z_index = -2
 position = Vector2(979, -846)
 scale = Vector2(0.6316306, 0.81180555)
 texture = ExtResource("4_04w0f")
 
 [node name="Down" type="Sprite2D" parent="Background" unique_id=528615178]
-z_index = -1
+z_index = -2
 position = Vector2(981, 251)
 scale = Vector2(0.6283153, 0.7118923)
 texture = ExtResource("5_sqgf4")
@@ -66,7 +67,7 @@ z_index = 4
 mouse_filter = 2
 
 [node name="background" type="TextureRect" parent="Legend_background" unique_id=2095724340]
-z_index = -2
+z_index = -3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
