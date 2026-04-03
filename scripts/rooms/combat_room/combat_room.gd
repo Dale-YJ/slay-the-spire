@@ -21,6 +21,7 @@ func _ready() -> void:
 	Events.player_turn_ended.connect(player_handler.end_turn)
 	Events.player_hand_discarded.connect(enemy_handler.start_turn)
 	
+	# 调试用
 	start_combat()
 	# 初始化牌堆
 	

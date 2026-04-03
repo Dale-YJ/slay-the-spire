@@ -8,6 +8,7 @@ signal deck_view_requested
 
 @export var run_stats:RunStats :set = set_run_stats
 @onready var gold_label: Label = $Left/TopBarGold/Label
+@onready var relic_handler: GridContainer = $RelicHandler
 
 
 func _ready()-> void:

@@ -8,9 +8,10 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 263.0
 grow_horizontal = 2
-theme_override_constants/h_separation = 35
-columns = 16
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 5
+columns = 24
 script = ExtResource("1_h8ot6")
 
-[node name="RelicUI13" parent="." unique_id=169955075 instance=ExtResource("1_ppywj")]
+[node name="RelicUI18" parent="." unique_id=1800990862 instance=ExtResource("1_ppywj")]
 layout_mode = 2

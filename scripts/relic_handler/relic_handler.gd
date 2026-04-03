@@ -9,6 +9,13 @@ func _ready() -> void:
 	
 	for relic_ui: RelicUI in get_children():
 		relic_ui.queue_free()
+	child_exiting_tree.connect(_on_relics_child_exiting_tree)
+	add_relic(preload("uid://d3a7gl0qcwuho"))
+	await get_tree().create_timer(1.0).timeout
+	add_relic(preload("uid://h2lk8mcg6tu5"))
+	await get_tree().create_timer(1.0).timeout
+	add_relic(preload("uid://b5niu17o73g0m"))
+	await get_tree().create_timer(1.0).timeout
 
 func activate_relics_by_trigger_type(type: Relic.TriggerType) -> void:
 	# 由信号解决：一般不会触发
@@ -39,12 +46,13 @@ func add_relic(relic: Relic) -> void:
 		return
 	var new_relic_ui: RelicUI = RELIC_UI.instantiate()
 	add_child(new_relic_ui)
-	new_relic_ui.relic = relic.duplicate()
+	new_relic_ui.set_relic(relic.duplicate())
 	new_relic_ui.relic.initialize_relic(new_relic_ui)
+	
 
 func _on_relics_child_exiting_tree(relic_ui: RelicUI) -> void:
 	if not relic_ui:
 		return 
 	
-	if relic_ui.relics:
-		relic_ui.deactivate_relic(relic_ui)
+	if relic_ui.relic:
+		relic_ui.relic.deactivate_relic(relic_ui)
