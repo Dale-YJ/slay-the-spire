@@ -46,3 +46,16 @@ func activate_relic(_owner: RelicUI) -> void:
 # 所有这个函数至少为了保险
 func deactivate_relic(_owner: RelicUI) -> void:
 	pass
+
+func can_appear_as_reward(character: CharacterStats, drop_type: Relic.RelicType) -> bool:
+	if (drop_type & relic_type) == 0:
+		return false
+	# 有点丑陋
+	match character.character_name:
+		"铁甲战士":
+			return (relic_type == CharacterType.IRON_CLAD) or (relic_type == CharacterType.COLORLESS)
+		"静默猎手":
+			return (relic_type == CharacterType.SILENT) or (relic_type == CharacterType.COLORLESS)
+		_:
+			return false 
+	
