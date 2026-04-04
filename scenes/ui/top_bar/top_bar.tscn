@@ -7,9 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b75ih21" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_ascension.tres" id="4_pdjxm"]
 [ext_resource type="Texture2D" uid="uid://bi1dpaj" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_heart.tres" id="5_pdjxm"]
 [ext_resource type="Texture2D" uid="uid://jqn0hv" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="6_iq0c2"]
-[ext_resource type="Texture2D" uid="uid://dc6bmjs4rlhtv" path="res://images/packed/potions/potion_placeholder.png" id="7_lb3d2"]
-[ext_resource type="Texture2D" uid="uid://1c6vpu" path="res://images/atlases/potion_outline_atlas.sprites/skill_potion.tres" id="8_t0dht"]
-[ext_resource type="Texture2D" uid="uid://b2h4440" path="res://images/atlases/potion_atlas.sprites/skill_potion.tres" id="9_5r65o"]
+[ext_resource type="PackedScene" uid="uid://dp7wdlyhund3e" path="res://scenes/ui/top_bar/potion_handler.tscn" id="8_y0s8s"]
 [ext_resource type="Texture2D" uid="uid://c14vmk38al8" path="res://images/ui/run_history/unknown_treasure_outline.png" id="10_34ry2"]
 [ext_resource type="Texture2D" uid="uid://cfj73l724ab5r" path="res://images/ui/run_history/unknown_treasure.png" id="11_aw7m0"]
 [ext_resource type="Texture2D" uid="uid://bxj1tlj" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_floor.tres" id="12_y0s8s"]
@@ -129,74 +127,8 @@ theme_override_colors/font_color = Color(0.94509804, 0.78431374, 0.27058825, 1)
 theme_override_font_sizes/font_size = 25
 text = "999"
 
-[node name="TopBarPotion" type="MarginContainer" parent="Left" unique_id=1922999958]
+[node name="TopBarPotion" parent="Left" unique_id=303628199 instance=ExtResource("8_y0s8s")]
 layout_mode = 2
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="PotionBackground" type="NinePatchRect" parent="Left/TopBarPotion" unique_id=1486016709]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-texture = ExtResource("2_ltrmm")
-patch_margin_left = 32
-patch_margin_top = 32
-patch_margin_right = 32
-patch_margin_bottom = 32
-
-[node name="MarginContainer" type="MarginContainer" parent="Left/TopBarPotion" unique_id=1557939300]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_right = 10
-
-[node name="PotionPlaceHolder" type="HBoxContainer" parent="Left/TopBarPotion/MarginContainer" unique_id=965517919]
-layout_mode = 2
-
-[node name="Potion" type="MarginContainer" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder" unique_id=436939580]
-layout_mode = 2
-
-[node name="OutLine" type="TextureRect" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder/Potion" unique_id=303170568]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextureRect" type="TextureRect" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder/Potion" unique_id=1251378404]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-texture = ExtResource("7_lb3d2")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Potion2" type="MarginContainer" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder" unique_id=853387106]
-layout_mode = 2
-
-[node name="OutLine" type="TextureRect" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder/Potion2" unique_id=400637119]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-texture = ExtResource("8_t0dht")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TextureRect" type="TextureRect" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder/Potion2" unique_id=1972441723]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-texture = ExtResource("9_5r65o")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Potion3" type="MarginContainer" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder" unique_id=903357657]
-layout_mode = 2
-
-[node name="OutLine" type="TextureRect" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder/Potion3" unique_id=141765355]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Left/TopBarPotion/MarginContainer/PotionPlaceHolder/Potion3" unique_id=924815197]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-texture = ExtResource("7_lb3d2")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="RoomIcons" type="HBoxContainer" parent="Left" unique_id=1544184524]
 layout_mode = 2

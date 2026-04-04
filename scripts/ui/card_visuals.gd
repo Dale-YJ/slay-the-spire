@@ -33,7 +33,7 @@ const CARD_FRAME_RED_MAT = preload("res://materials/cards/frames/card_frame_red_
 @onready var card_frame: TextureRect = %CardFrame
 @onready var portrait_border: TextureRect = %PortraitBorder
 @onready var title_label: RichTextLabel = %TitleLabel
-@onready var energy_label: Label = %EnergyLabel
+@onready var energy_label: RichTextLabel = %EnergyLabel
 @onready var type_label: Label = %TypeLabel
 @onready var description_label: RichTextLabel = %DescriptionLabel
 @onready var title_banner: TextureRect = $TitleBanner
@@ -48,7 +48,10 @@ func _set_card(value: Card) -> void:
 	card_portrait.texture = card.portrait
 	title_label.text = card.get_title()
 	if card.playable:
-		energy_label.text = str(card.get_cost())
+		if card.first_play_free:
+			energy_label.text = "[color=green]0[/green]"
+		else:
+			energy_label.text = str(card.get_cost())
 	else:
 		energy_icon.visible = false
 	description_label.text = card.get_default_description()

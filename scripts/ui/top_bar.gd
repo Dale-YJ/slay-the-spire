@@ -9,7 +9,7 @@ signal deck_view_requested
 @export var run_stats:RunStats :set = set_run_stats
 @onready var gold_label: Label = $Left/TopBarGold/Label
 @onready var relic_handler: GridContainer = $RelicHandler
-
+@onready var top_bar_potion: PotionHandler = $Left/TopBarPotion
 
 func _ready()-> void:
 	gold_label.text ="0"
@@ -26,5 +26,9 @@ func set_run_stats(new_value:RunStats)->void:
 	if not run_stats.gold_changed.is_connected(_update_gold):
 		run_stats.gold_changed.connect(_update_gold)
 		_update_gold()
+		
 func _update_gold()->void:
 	gold_label.text=str(run_stats.gold)
+
+func add_potion(potion: Potion) -> bool:
+	return top_bar_potion.add_potion(potion)

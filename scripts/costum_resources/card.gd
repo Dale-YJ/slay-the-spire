@@ -50,6 +50,8 @@ enum COLOR {
 @export var upgraded: bool = false
 @export var upgradable: bool = true
 
+var first_play_free := false
+
 
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 	var ret = {}
@@ -78,7 +80,10 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 
 func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> void:
 	Events.card_played.emit(self)
-	char_stats.energy -= get_cost()
+	if first_play_free:
+		first_play_free = false
+	else:
+		char_stats.energy -= get_cost()
 	if is_single_targeted():
 		apply_effects(source, targets)
 	else:

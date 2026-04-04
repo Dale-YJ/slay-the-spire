@@ -2,8 +2,6 @@
 class_name FragileDebuff
 extends Buff
 
-
-
 func _init() -> void:
 	# 一定要在init中设置buff名
 	# 在buff进树之前会判断buff_name

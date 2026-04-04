@@ -17,7 +17,6 @@ func _ready() -> void:
 	# 这步应该在开始一局时进行
 	#var new_stats: CharacterStats = char_stats.create_instance()
 	
-	
 	enemy_handler.child_order_changed.connect(_on_child_order_changed)
 	Events.enemy_turn_ended.connect(_on_enemy_turn_ended)
 	Events.player_turn_ended.connect(player_handler.end_turn)
@@ -67,6 +66,7 @@ func _on_relics_activated(type: Relic.TriggerType) -> void:
 			player_handler.relics = relics
 			player_handler.start_battle(char_stats)
 			combat_ui.initialize_card_pile_view()
+			Events.combat_start.emit()
 		Relic.TriggerType.END_OF_COMBAT:
 			Events.combat_won.emit()
 			

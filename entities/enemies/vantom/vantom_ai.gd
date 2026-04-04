@@ -32,5 +32,7 @@ func choose_intent(_source: Creature, _target: Creature) -> Intent:
 			return get_intent_by_name(intents, "Dismental")
 		"Dismental":
 			return get_intent_by_name(intents, "ChargeUp")
+		"ChargeUp":
+			return get_intent_by_name(intents, "InkStain")
 		_:
 			return random_intent(intents)

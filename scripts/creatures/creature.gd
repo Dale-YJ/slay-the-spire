@@ -75,7 +75,7 @@ func get_modifiers_by_type(type: Enums.NumericType, affect: Buff.AFFECT) -> Arra
 	var ret := []
 	for child: Buff in buff_manager.get_children():
 		if child.affect == affect or child.affect == Buff.AFFECT.ALL:
-			ret += child.get_modifiers_on_type(type)
+			ret += child.get_modifiers_by_type(type)
 	return ret
 
 func start_turn() -> void:
