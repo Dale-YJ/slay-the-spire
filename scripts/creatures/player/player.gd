@@ -174,7 +174,6 @@ func _update_player() -> void:
 		return
 	if not is_node_ready():
 		await ready	
-	
 	set_hitbox()
 	spine_anim_state = spine_manager.get_animation_state()
 	spine_anim_state.set_animation("idle_loop", true, 0)
