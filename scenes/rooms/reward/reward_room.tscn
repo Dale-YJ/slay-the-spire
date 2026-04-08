@@ -137,7 +137,7 @@ layout_mode = 2
 reward_icon = ExtResource("7_imf42")
 reward_text = "add 127 gold"
 
-[node name="CardReward" parent="Loot/rewardBG/rewards" unique_id=1685689396 instance=ExtResource("6_sjaqs")]
+[node name="CardReward" parent="Loot/rewardBG/rewards" unique_id=281840860 instance=ExtResource("6_sjaqs")]
 layout_mode = 2
 reward_icon = ExtResource("8_bahxe")
 reward_text = "111"

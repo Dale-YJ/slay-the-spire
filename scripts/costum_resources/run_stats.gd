@@ -14,6 +14,7 @@ const BASE_RARE_WEIGHT := 0.3
 
 @export var gold := STARTING_GOLD : set = set_gold
 
+
 @export var card_rewards := BASE_CARD_REWARDS
 @export_range(0.0,10.0)var common_weight := BASE_COMMON_WEIGHT
 @export_range(0.0,10.0) var uncommon_weight := BASE_UNCOMMON_WEIGHT

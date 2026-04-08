@@ -40,6 +40,7 @@ enum COLOR {
 @export var exhaust: bool
 # 是否带”虚无“词条
 @export var ethereal: bool
+@export var playable : bool = true
 # 升级后
 @export_group("升级后")
 @export var upgraded_target: Target
@@ -48,6 +49,8 @@ enum COLOR {
 @export var upgraded_numeric_entries: Array[NumericEntry]
 @export var upgraded: bool = false
 @export var upgradable: bool = true
+
+var first_play_free := false
 
 
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
@@ -77,7 +80,10 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 
 func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> void:
 	Events.card_played.emit(self)
-	char_stats.energy -= get_cost()
+	if first_play_free:
+		first_play_free = false
+	else:
+		char_stats.energy -= get_cost()
 	if is_single_targeted():
 		apply_effects(source, targets)
 	else:

@@ -55,17 +55,21 @@ func _on_map_room_selected(room: Room) -> void:
 	var scene: PackedScene
 	match room.type:
 		Room.Type.MONSTER:
-			scene = COMBAT_SCENE
+			_on_combat_room_entered(room)
+			return
 		Room.Type.ELITE:
-			scene = COMBAT_SCENE   # 精英怪也是战斗
+			_on_combat_room_entered(room)
+			return
 		Room.Type.BOSS:
-			scene = COMBAT_SCENE
+			_on_combat_room_entered(room)
+			return
 		Room.Type.TREASURE:
 			scene = TREASURE_SCENE
 		Room.Type.SHOP:
 			scene = SHOP_SCENE
 		Room.Type.CAMPFIRE:
-			scene = CAMPFIRE_SCENE
+			_on_campfire_room_entered(room)
+			return
 		Room.Type.UNKNOWN:
 			scene = INCIDENT_SCENE   # 事件房间
 		_:
@@ -73,22 +77,12 @@ func _on_map_room_selected(room: Room) -> void:
 
 	# 切换视图
 	var new_room_node = _change_view(scene)
-	
-	# 如果是战斗房间，还需要传递敌人数据
-	#if scene == COMBAT_SCENE:
-		#var combat_room = new_room_node as CombatRoom
-		#combat_room.char_stats = character
-		## 从 room 中获取敌人生成数据（例如 room.enemy_encounter）
-		## 需要确保 Room 资源中包含了 encounter 信息
-		#combat_room.enemy_encounter = room.enemy_encounter
-		#combat_room.start_combat()
 		
 func _start_run() -> void:
 	stats = RunStats.new()
 	
 	_setup_event_connections()
 	_setup_top_bar()
-	# TODO: 生成地图
 	map_node.init(stats)
 	_show_map()
 	#debug
@@ -103,7 +97,9 @@ func _setup_top_bar() -> void:
 	
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
-
+	# 遗物
+	top_bar.relic_handler.add_relic(character.starting_relic)
+	
 
 func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
@@ -111,18 +107,6 @@ func _change_view(scene: PackedScene) -> Node:
 		
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
-	
-	# zhanghaoqian
-	if scene == COMBAT_SCENE:
-		# 这段应该在_on_battle_room_entered(room: Room)中实现，new_view.enemy_encounter = room.enemy_encounter
-		new_view = new_view as CombatRoom
-		new_view.char_stats = character
-		# 测试怪物池使用的代码
-		var encounter_pool = preload("res://entities/encounters/encounter_pools/act1_encounter_pool.tres")
-		new_view.enemy_encounter = encounter_pool.get_random_encounter_by_type(EnemyEncounter.Type.WEAK)
-		#
-		new_view.start_combat()
-	#
 	
 	return new_view
 	
@@ -139,8 +123,10 @@ func _on_combat_won() -> void:
 	# as a dependency
 	
 	# reward_scene.add_gold_reward(map.last_room.enemy_encounter.roll_gold_reward())
-	#reward_scene.add_gold_reward(77)
-	#reward_scene.add_card_reward()
+	reward_scene.add_gold_reward(map_node.last_room.enemy_encounter.roll_gold_reward())
+	reward_scene.add_card_reward()
+
+
 	
 func _setup_event_connections() -> void:
 	Events.combat_won.connect(_on_combat_won)
@@ -162,7 +148,7 @@ func _setup_event_connections() -> void:
 	Events.map_exited.connect(_on_map_exited)
 	map.pressed.connect(_show_map)
 	#test
-	combat.pressed.connect(_change_view.bind(COMBAT_SCENE))
+	combat.pressed.connect(_on_combat_room_entered)
 	rewards.pressed.connect(_change_view.bind(COMBAT_REWARD_SCENE))
 	treasure.pressed.connect(_change_view.bind(TREASURE_SCENE))
 	shop.pressed.connect(_change_view.bind(SHOP_SCENE))
@@ -191,3 +177,15 @@ func _on_room_exited() -> void:
 	map_node.complete_current_room()
 	# 显示地图
 	_show_map()
+
+func _on_combat_room_entered(room: Room):
+	var battle_scene :CombatRoom = _change_view(COMBAT_SCENE)
+	battle_scene.char_stats = character
+	battle_scene.enemy_encounter = room.enemy_encounter
+	battle_scene.relics = top_bar.relic_handler
+	battle_scene.start_combat()
+
+func _on_campfire_room_entered(room: Room)-> void:
+	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
+	capfire_scene.char_stats=character
+	
