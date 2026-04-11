@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://nxhrbcu264p5" path="res://images/ui/cards/upgrade_preview/upgrade_arrow.png" id="3_v78wn"]
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="3_vuis1"]
 [ext_resource type="Texture2D" uid="uid://w1mk8x" path="res://images/atlases/card_atlas.sprites/ironclad/strike_ironclad.tres" id="4_6lbwm"]
-[ext_resource type="Script" uid="uid://c43aulk6qym1v" path="res://entities/characters/ironclad/cards/打击.gd" id="5_0sicv"]
+[ext_resource type="Script" uid="uid://c43aulk6qym1v" path="res://entities/cards/ironclad/打击.gd" id="5_0sicv"]
 [ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="6_mgxkx"]
 [ext_resource type="PackedScene" uid="uid://tnl8udgtv6w5" path="res://scenes/ui/comfirm_button.tscn" id="8_cs7d6"]
 [ext_resource type="Texture2D" uid="uid://cp3mg3t" path="res://images/atlases/compressed.sprites/confirm_button_tick.tres" id="9_wvl4l"]

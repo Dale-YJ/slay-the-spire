@@ -5,16 +5,19 @@ extends Creature
 signal before_draw_cards(context: DrawCardContext)
 signal after_draw_card(card: Card)
 
-
 @export var stats: CharacterStats : set = _set_char_stats
 @export var hand_selector: HandSelector
 @export var deck_view: DeckView
+@export var discover_view: DiscoverCardView
 @export var agent: PlayerHandler
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
 
 var visuals: CreatureVisuals
 var spine_manager: SpineManager
+
+# 本回合打出攻击牌的数量
+var attack_played_this_turn := 0
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
@@ -33,6 +36,15 @@ func speech(text: String, time: float = 2.5) -> void:
 	#buff_ui.buff = buff_context.buff_node
 	#buff_container.add_child(buff_ui)
 
+func discover_card(context: DiscoverContext) -> void:
+	var availabel_cards := CardPool.get_discoverable_cards(context.color, context.type, context.rarity)
+	availabel_cards.shuffle()
+	# 随机三张
+	var discovered_cards := availabel_cards.slice(0, 3)
+	var card: Card = await discover_view.select(discovered_cards, context.can_skip, context.upgraded, context.first_play_free)
+	put_card_in_hand(card)
+	
+	
 func select_hand(context: ChooseCardContext) -> void:
 	var selected: Array[Card]
 	agent.hide_hand()
@@ -156,6 +168,7 @@ func start_turn() -> void:
 	after_turn_started.emit(self)
 
 func end_turn() -> void:
+	attack_played_this_turn = 0
 	turn_ended.emit(self)
 		
 func _set_char_stats(value: CharacterStats) -> void:
@@ -191,6 +204,7 @@ func _update_player() -> void:
 
 func _on_card_played(card: Card) -> void:
 	if card.type == Card.Type.ATTACK:
+		attack_played_this_turn += 1
 		spine_anim_state.set_animation("attack", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	else:
