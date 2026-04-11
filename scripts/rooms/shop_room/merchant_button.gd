@@ -17,7 +17,7 @@ var hand_hide_timer: Timer
 var hand_shake_timer: Timer
 var base_hand_pos: Vector2
 var current_shake_tween: Tween
-var hand_move_tween: Tween   # 用于保存手部移动动画
+var hand_move_tween: Tween   
 
 func _ready() -> void:
 #	商人初始动画
