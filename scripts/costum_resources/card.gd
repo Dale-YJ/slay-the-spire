@@ -67,6 +67,9 @@ enum COLOR {
 @export var upgraded: bool = false
 @export var upgradable: bool = true
 
+# 卡牌效果列表
+var effects: Array[Effect]
+
 var first_play_free := false
 
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
@@ -108,6 +111,7 @@ func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> v
 	if enchantment:
 		enchantment.on_play(source, targets)
 	Events.card_played.emit(self)
+
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass
@@ -181,8 +185,6 @@ func upgrade() -> void:
 
 func get_numeric_entries() -> Array[NumericEntry]:
 	return upgraded_numeric_entries if upgraded else base_numeric_entries
-
-
 
 func _get_numeric_value(entry: NumericEntry, player: Player = null, target: Creature = null) -> int:
 	match entry.source:
