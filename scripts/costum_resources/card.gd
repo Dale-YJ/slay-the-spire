@@ -1,6 +1,7 @@
 class_name Card
 extends Resource
 # 卡牌类型(攻击，技能，能力)
+
 enum Type {
 	ATTACK = 0b00001, 
 	SKILL = 0b00010, 
@@ -46,6 +47,7 @@ enum COLOR {
 @export var discoverable: bool = true
 # 是否可作为卡牌奖励
 @export var draftable: bool = true
+@export var enchantment: Enchantment = null
 @export_group("卡牌描述")
 @export var portrait: Texture
 @export_multiline var base_description: String
@@ -65,6 +67,9 @@ enum COLOR {
 @export var upgraded_numeric_entries: Array[NumericEntry]
 @export var upgraded: bool = false
 @export var upgradable: bool = true
+
+# 卡牌效果列表
+var effects: Array[Effect]
 
 var first_play_free := false
 
@@ -89,6 +94,8 @@ func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
 				modifiers = []
 			_:
 				printerr("未知的NumericEntry")
+		if enchantment:
+			modifiers = NumericHelper.combine_modifiers(modifiers, enchantment.get_modifiers_by_type(entry.type))
 		var final_value = NumericHelper.apply_modifiers(base_value, modifiers)
 		ret[entry.placeholder] = final_value
 	return ret
@@ -102,7 +109,10 @@ func play(source: Player, targets: Array[Node], char_stats: CharacterStats) -> v
 		apply_effects(source, targets)
 	else:
 		apply_effects(source, _get_targets(source, targets))
+	if enchantment:
+		enchantment.on_play(source, targets)
 	Events.card_played.emit(self)
+
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass
@@ -166,6 +176,8 @@ func append_features(desc: String) -> String:
 		desc += "[p][center][color=gold]消耗。[/color][/center]"
 	if ethereal:
 		desc += "[p][center][color=gold]虚无。[/color][/center]"
+	if enchantment:
+		desc += enchantment.get_additional_card_description()
 	return desc
 
 func upgrade() -> void:
@@ -200,8 +212,13 @@ func _get_numeric_value(entry: NumericEntry, player: Player = null, target: Crea
 			print("未实现")
 			return 0
 
-func get_numeric_value(entries: Array[NumericEntry], index: int, player: Player = null, target: Creature = null) -> int:
-	return _get_numeric_value(entries[index], player, target)
+func get_numeric_value(entries: NumericEntry, player: Player = null, target: Creature = null) -> int:
+	return _get_numeric_value(entries, player, target)
+
+func get_enchantment_modifiers(entry: NumericEntry) -> Array:
+	if has_enchantment():
+		return enchantment.get_modifiers_by_type(entry.type)
+	return []
 
 func _get_default_description() -> String:
 	return upgraded_description if upgraded else base_description
@@ -211,3 +228,10 @@ func get_cost() -> int:
 
 func get_target() -> Target:
 	return upgraded_target if upgraded else base_target
+
+func has_enchantment() -> bool:
+	return !(enchantment == null)
+
+func set_echantment(enchantment_: Enchantment) -> void:
+	enchantment = enchantment_
+	enchantment.on_enchant_set(self)
