@@ -88,3 +88,9 @@ func reset_weights()->void:
 func set_floor(new_floor_climbed)->void:
 	floors_climbed = new_floor_climbed
 	floor_changed.emit(new_floor_climbed)
+
+func has_relic(relic_id: String) -> bool:
+	for relic in relics:
+		if relic.id == relic_id:
+			return true
+	return false

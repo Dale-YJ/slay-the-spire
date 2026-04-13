@@ -68,17 +68,17 @@ enum COLOR {
 @export var upgraded: bool = false
 @export var upgradable: bool = true
 
-<<<<<<< HEAD
+
 # 商店售价(无需自定义)
 # 原价（用于显示划掉的折扣前价格，可选）
 @export var original_price: int = 0
 @export var shop_price: int = 0
 # 是否正在打折
 @export var on_sale: bool = false
-=======
+
 # 卡牌效果列表
 var effects: Array[Effect]
->>>>>>> 23c3722bd53555966642911b63e8a6e797942102
+
 
 var first_play_free := false
 
@@ -238,15 +238,14 @@ func get_cost() -> int:
 func get_target() -> Target:
 	return upgraded_target if upgraded else base_target
 
-<<<<<<< HEAD
+
 # 获取当前实际售价（打折后）
 func get_shop_price() -> int:
 	return shop_price
-=======
+
 func has_enchantment() -> bool:
 	return !(enchantment == null)
 
 func set_echantment(enchantment_: Enchantment) -> void:
 	enchantment = enchantment_
 	enchantment.on_enchant_set(self)
->>>>>>> 23c3722bd53555966642911b63e8a6e797942102

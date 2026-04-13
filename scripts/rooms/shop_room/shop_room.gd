@@ -261,8 +261,12 @@ func _populate_relics() -> void:
 
 	var available_relics: Array[Relic] = []
 	for relic in relic_pile.relics:
-		if relic.can_appear_as_reward(character_stats, Relic.RelicType.SHOP_RELIC):
-			available_relics.append(relic)
+		if not relic.can_appear_as_reward(character_stats, Relic.RelicType.SHOP_RELIC):
+			continue
+		# 过滤已拥有的遗物
+		if run_stats.has_relic(relic.id):
+			continue
+		available_relics.append(relic)
 	available_relics.shuffle()
 
 	var slots: Array[Control] = _find_slots(relics_container, "merchant_relic.gd", "set_relic_data", "MerchantRelic")
@@ -277,8 +281,8 @@ func _populate_relics() -> void:
 		_set_data(slot, "run_stats", run_stats)
 		_connect_click_signal(slot, "relic_clicked", _on_relic_purchased)
 		_connect_hand_signals(slot)
-	#print("遗物填充完成，实际显示数量：", count)
-
+	# print("遗物填充完成，实际显示数量：", count)
+	
 func _populate_potions() -> void:
 	if not slots_container:
 		return

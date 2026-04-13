@@ -60,12 +60,10 @@ func _on_map_room_selected(room: Room) -> void:
 			_on_campfire_room_entered(room)
 			return
 		Room.Type.UNKNOWN:
-<<<<<<< HEAD
 			scene = INCIDENT_SCENE
-=======
 			_on_incident_room_entered(room)
 			return
->>>>>>> 23c3722bd53555966642911b63e8a6e797942102
+
 		_:
 			return
 
@@ -172,15 +170,15 @@ func _on_combat_room_entered(room: Room = null):
 	battle_scene.relics = top_bar.relic_handler
 	battle_scene.start_combat()
 
-<<<<<<< HEAD
-func _on_campfire_room_entered(room: Room) -> void:
-	var campfire_scene :CampfireRoom = await _change_view(CAMPFIRE_SCENE) as CampfireRoom
-	campfire_scene.char_stats = character
-	campfire_scene.deck_view = deck_view
+
+#func _on_campfire_room_entered(room: Room) -> void:
+	#var campfire_scene :CampfireRoom = await _change_view(CAMPFIRE_SCENE) as CampfireRoom
+	#campfire_scene.char_stats = character
+	#campfire_scene.deck_view = deck_view
 
 func _change_view_deferred(scene: PackedScene) -> void:
 	await _change_view(scene)
-=======
+
 func _on_campfire_room_entered(room: Room)-> void:
 	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
 	capfire_scene.char_stats=character
@@ -194,4 +192,3 @@ func _on_incident_room_entered(room: Room)->void:
 	incident_scene.deck_view=deck_view
 	incident_scene.init()
 	
->>>>>>> 23c3722bd53555966642911b63e8a6e797942102
