@@ -83,7 +83,6 @@ func die() -> void:
 
 func draw_card(context: DrawCardContext) -> void:
 	before_draw_card.emit(context)
-	print(context.amount)
 	if context.amount != 0:
 		var card: Card = agent.draw_card()
 		after_draw_card.emit(card)

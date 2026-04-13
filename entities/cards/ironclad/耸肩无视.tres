@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_bccfr"]
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="3_5wk7v"]
 [ext_resource type="Script" uid="uid://ccn4rd333asft" path="res://entities/cards/ironclad/耸肩无视.gd" id="3_a6tga"]
-[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="4_x4nvq"]
+[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_x4nvq"]
 
 [sub_resource type="Resource" id="Resource_n0n14"]
 script = ExtResource("2_bccfr")
