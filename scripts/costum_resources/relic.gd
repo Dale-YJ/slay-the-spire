@@ -34,6 +34,10 @@ enum CharacterType{
 ## e.g. 输入0b0110: 普通遗物+商店遗物
 @export_range(0, 15) var relic_type: int
 
+@export var shop_price: int = 0
+@export var on_sale: bool = false
+@export var original_price: int = 0
+
 func initialize_relic(_owner: RelicUI) -> void:
 	pass
 
@@ -47,15 +51,41 @@ func activate_relic(_owner: RelicUI) -> void:
 func deactivate_relic(_owner: RelicUI) -> void:
 	pass
 
+#func can_appear_as_reward(character: CharacterStats, drop_type: Relic.RelicType) -> bool:
+	#if (drop_type & relic_type) == 0:
+		#return false
+	## 有点丑陋
+	#match character.character_name:
+		#"铁甲战士":
+			#return (relic_type == CharacterType.IRON_CLAD) or (relic_type == CharacterType.COLORLESS)
+		#"静默猎手":
+			#return (relic_type == CharacterType.SILENT) or (relic_type == CharacterType.COLORLESS)
+		#_:
+			#return false 
+	
+#debug
 func can_appear_as_reward(character: CharacterStats, drop_type: Relic.RelicType) -> bool:
+	#print("检查遗物: ", relic_name)
+	#print("  relic_type = ", relic_type, " (二进制: ", ("%04b" % relic_type), ")")
+	#print("  drop_type  = ", drop_type, " (二进制: ", ("%04b" % drop_type), ")")
+	#print("  位与结果   = ", drop_type & relic_type)
+	
 	if (drop_type & relic_type) == 0:
+		#print("  -> 失败：遗物不包含 SHOP_RELIC 标记")
 		return false
-	# 有点丑陋
+	
+	#print("  character_type = ", character_type)
+	#print("  当前角色: ", character.character_name)
+	
 	match character.character_name:
 		"铁甲战士":
-			return (relic_type == CharacterType.IRON_CLAD) or (relic_type == CharacterType.COLORLESS)
+			var valid = (character_type == CharacterType.IRON_CLAD) or (character_type == CharacterType.COLORLESS)
+			#print("  -> 角色匹配结果: ", valid)
+			return valid
 		"静默猎手":
-			return (relic_type == CharacterType.SILENT) or (relic_type == CharacterType.COLORLESS)
+			var valid = (character_type == CharacterType.SILENT) or (character_type == CharacterType.COLORLESS)
+			#print("  -> 角色匹配结果: ", valid)
+			return valid
 		_:
-			return false 
-	
+			#print("  -> 未知角色，默认返回 false")
+			return false

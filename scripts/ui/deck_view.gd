@@ -139,7 +139,8 @@ func select_card_pile(pile: Array[Card], min_select: int = 0, max_select: int = 
 		card_ui.queue_free()
 	_update_view(false)
 	confirm_button.visible = len(selected_cards) >= min_selection
-	back_button.visible = min_select == 0
+	back_button.visible = true
+	#back_button.visible = min_select == 0
 	show()
 	await selection_confirmed
 	return selected_cards
