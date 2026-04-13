@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dt14luwusxnb5"]
 
-[ext_resource type="Script" uid="uid://ckfhumouqokto" path="res://scripts/rooms/shop_room/ironclad_merchant.gd" id="1_g8nwy"]
+[ext_resource type="Script" uid="uid://ckfhumouqokto" path="res://scripts/rooms/shop_room/ironclad_m.gd" id="1_g8nwy"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://cpfe18byewpmx" path="res://animations/merchant/ironclad/ironclad_merchant_skel_data.tres" id="2_8o68q"]
 
 [node name="IroncladMerchant" type="Node2D" unique_id=720292306]

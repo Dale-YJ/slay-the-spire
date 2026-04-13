@@ -16,12 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://c3f5ypj38nefb" path="res://images/packed/combat_ui/exhaust_pile.png" id="12_hylje"]
 [ext_resource type="PackedScene" uid="uid://dwj3mdroe0dgp" path="res://scenes/rooms/combat_room/combat_ui/hand_selelctor.tscn" id="13_4hrnf"]
 [ext_resource type="Script" uid="uid://b7jbna8u8wfw1" path="res://scripts/rooms/combat_room/combat_ui/red_flash.gd" id="13_d1stk"]
-<<<<<<< HEAD
-[ext_resource type="Texture2D" uid="uid://bu4t3lmsql4f3" path="res://images/rooms/underdocks/underdocks_01_a.png" id="14_fjeak"]
-=======
 [ext_resource type="Texture2D" uid="uid://cvxy8ydgwomqh" path="res://images/rooms/underdocks/underdocks_01_a.png" id="14_fjeak"]
 [ext_resource type="PackedScene" uid="uid://bpxa77yfyyws0" path="res://scenes/rooms/combat_room/combat_ui/discover_card_view.tscn" id="15_4hrnf"]
->>>>>>> be4151e6753199a46ef39383c36230650839c7bf
 [ext_resource type="PackedScene" uid="uid://bijk3yg4btssm" path="res://scenes/ui/deck_view.tscn" id="15_hylje"]
 [ext_resource type="Texture2D" uid="uid://cuitjetrtc6k8" path="res://images/rooms/underdocks/underdocks_02_a.png" id="15_s0f1l"]
 [ext_resource type="Texture2D" uid="uid://buq4ks50ewhi0" path="res://images/rooms/underdocks/underdocks_04_a.png" id="16_tey1o"]

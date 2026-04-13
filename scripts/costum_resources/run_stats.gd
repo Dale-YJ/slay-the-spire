@@ -12,7 +12,7 @@ signal potion_removed(index: int)
 signal relic_added(relic: Relic)
 signal relic_removed(relic: Relic)
 
-const STARTING_GOLD:= 70
+const STARTING_GOLD:= 75
 
 const BASE_CARD_REWARDS := 3;
 const BASE_COMMON_WEIGHT := 6.0

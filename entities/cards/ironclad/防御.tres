@@ -1,16 +1,9 @@
 [gd_resource type="Resource" format=3 uid="uid://b5jbjk3a0xd0q"]
 
-<<<<<<< HEAD:entities/characters/ironclad/cards/防御.tres
-[ext_resource type="Texture2D" uid="uid://cxnepi0" path="res://images/atlases/card_atlas.sprites/ironclad/defend_ironclad.tres" id="1_2fmq3"]
-[ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_rknk0"]
-[ext_resource type="Script" uid="uid://b6koyyeqx1l35" path="res://entities/characters/ironclad/cards/防御.gd" id="2_kysfd"]
-[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="3_gvm3b"]
-=======
 [ext_resource type="Script" uid="uid://cxgxfbwykbp84" path="res://scripts/costum_resources/numeric_entry.gd" id="1_lbc2p"]
 [ext_resource type="Texture2D" uid="uid://cxnepi0" path="res://images/atlases/card_atlas.sprites/ironclad/defend_ironclad.tres" id="2_svckb"]
 [ext_resource type="Script" uid="uid://b6koyyeqx1l35" path="res://entities/cards/ironclad/防御.gd" id="3_6dpba"]
-[ext_resource type="AudioStream" uid="uid://cnxfhtrl0n8nm" path="res://audio/SFX/frost_orb_passive.mp3" id="4_8q7md"]
->>>>>>> be4151e6753199a46ef39383c36230650839c7bf:entities/cards/ironclad/防御.tres
+[ext_resource type="AudioStream" uid="uid://dg3m3v6ldrym8" path="res://audio/SFX/frost_orb_passive.mp3" id="4_8q7md"]
 
 [sub_resource type="Resource" id="Resource_rknk0"]
 script = ExtResource("1_lbc2p")

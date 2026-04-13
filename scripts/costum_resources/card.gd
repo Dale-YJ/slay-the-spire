@@ -66,6 +66,13 @@ enum COLOR {
 @export var upgraded: bool = false
 @export var upgradable: bool = true
 
+# 商店售价(无需自定义)
+# 原价（用于显示划掉的折扣前价格，可选）
+@export var original_price: int = 0
+@export var shop_price: int = 0
+# 是否正在打折
+@export var on_sale: bool = false
+
 var first_play_free := false
 
 func get_final_values(source_: Creature, target_: Creature) -> Dictionary:
@@ -211,3 +218,7 @@ func get_cost() -> int:
 
 func get_target() -> Target:
 	return upgraded_target if upgraded else base_target
+
+# 获取当前实际售价（打折后）
+func get_shop_price() -> int:
+	return shop_price

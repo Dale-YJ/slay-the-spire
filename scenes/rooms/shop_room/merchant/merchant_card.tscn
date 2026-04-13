@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://rdkoq04iuuhe"]
 
-[ext_resource type="Script" uid="uid://b5w1wxumblj1l" path="res://scripts/rooms/shop_room/merchant_card.gd" id="1_v6k04"]
+[ext_resource type="Script" uid="uid://b5w1wxumblj1l" path="res://scripts/rooms/shop_room/merchant/merchant_card.gd" id="1_v6k04"]
 [ext_resource type="Texture2D" uid="uid://jqn0hv" path="res://images/atlases/ui_atlas.sprites/top_bar/top_bar_gold.tres" id="3_6ghqk"]
 [ext_resource type="FontVariation" uid="uid://ciql5khgewwbm" path="res://themes/kreon_bold_glyph_space_two.tres" id="5_6j4fw"]
 [ext_resource type="Texture2D" uid="uid://bo015jddaklih" path="res://images/rooms/merchant_room/shop_sales_tag.png" id="6_dcvn4"]
