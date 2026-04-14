@@ -23,13 +23,20 @@ func setup_enemies(encounter: EnemyEncounter) -> void:
 		new_enemy.position = enemy_entry.position
 		new_enemy.stats = enemy_entry.enemy_stats.create_instance()
 		
-		new_enemy.ready.connect(
-			func():
-				var buffs := enemy_entry.get_initial_buffs()
-				for key in buffs.keys():
-					new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, buffs[key], key))
-				)
+		
 		add_child(new_enemy)
+		if !new_enemy.is_node_ready():
+			await new_enemy.ready
+			
+		var buffs := enemy_entry.get_initial_buffs()
+		for key in buffs.keys():
+			new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, buffs[key], key))
+		#new_enemy.ready.connect(
+			#func():
+				#var buffs := enemy_entry.get_initial_buffs()
+				#for key in buffs.keys():
+					#new_enemy.add_buff(ApplyBuffContext.new(new_enemy, new_enemy, buffs[key], key))
+				#)
 		
 
 func start_turn() -> void:

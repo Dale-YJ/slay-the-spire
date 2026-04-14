@@ -26,7 +26,7 @@ var target: Creature
 
 
 func execute() -> void:
-	effect.execute(source, {"targets": [target] as Array[Node]}, null)
+	await effect.execute(source, {"targets": [target] as Array[Node]}, null)
 
 func get_text() -> String:
 	#match type:
@@ -44,6 +44,8 @@ func get_intent_name() -> String:
 	match type:
 		Type.ATTACK:
 			return "[color=gold]攻势[/color]"
+		Type.BUFF:
+			return "[color=gold]强化[/color]"
 		Type.DEFFEND:
 			return "[color=gold]守势[/color]"
 		Type.DEBUFF:

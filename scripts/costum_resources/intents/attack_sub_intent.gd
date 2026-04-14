@@ -19,7 +19,7 @@ func get_intent_description() -> String:
 		repeat = repeat_provider.get_value()
 	if repeat > 1:
 		return "该敌人将要[color=gold]攻击[/color]造成{0}点伤害{1}次".format([damage_provider.get_value(null, {}), repeat])
-	return ""
+	return "该敌人将要[color=gold]攻击[/color]造成{0}点伤害".format([damage_provider.get_value(null, {})])
 
 func _get_final_value(base_value: int) -> int:
 		var modifiers : Array = []

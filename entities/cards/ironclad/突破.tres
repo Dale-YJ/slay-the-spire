@@ -45,14 +45,14 @@ lose_health_provider = SubResource("Resource_3tp6p")
 target_type = 1
 metadata/_custom_type_script = "uid://bgxakc1nj11hm"
 
-[sub_resource type="Resource" id="Resource_tnnpu"]
+[sub_resource type="Resource" id="Resource_w2fya"]
 script = ExtResource("2_w2fya")
 fixed_value = 9
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_qv3st"]
+[sub_resource type="Resource" id="Resource_cecr8"]
 script = ExtResource("5_3j5tx")
-damage_provider = SubResource("Resource_tnnpu")
+damage_provider = SubResource("Resource_w2fya")
 target_type = 3
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
@@ -108,7 +108,7 @@ script = ExtResource("2_82msx")
 id = "突破"
 base_target = 2
 base_cost = 1
-effects = Array[ExtResource("3_cecr8")]([SubResource("Resource_1f51j"), SubResource("Resource_qv3st")])
+effects = Array[ExtResource("3_cecr8")]([SubResource("Resource_1f51j"), SubResource("Resource_cecr8")])
 portrait = ExtResource("1_mytnf")
 base_description = "[center]失去{lose_health}点生命。[/center][p][center]对所有敌人造成{damage}点伤害。[/center]"
 sound = ExtResource("3_7hojj")

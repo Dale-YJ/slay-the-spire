@@ -44,6 +44,9 @@ char_stats = ExtResource("2_7btib")
 music = ExtResource("3_hylje")
 metadata/_edit_lock_ = true
 
+[node name="SFXLayer" type="CanvasLayer" parent="." unique_id=1811299611]
+unique_name_in_owner = true
+
 [node name="CombatUI" type="CanvasLayer" parent="." unique_id=661618034 groups=["ui_layer"]]
 unique_name_in_owner = true
 script = ExtResource("4_4hrnf")

@@ -20,6 +20,8 @@ enum Rarity{
 @export var outline_icon: Texture
 @export var target_type: TargetType
 @export var rarity: Rarity
+@export var effects: Array[Effect]
 
-func play(_source: Node, _targets: Array[Node]) -> void:
-	pass
+func play(source: Node, targets: Array[Node]) -> void:
+	for effect: Effect in effects:
+		await effect.execute(source, {"targets": targets}, null)

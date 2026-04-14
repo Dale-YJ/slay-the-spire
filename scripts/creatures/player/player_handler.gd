@@ -23,6 +23,7 @@ func start_battle(char_stats_: CharacterStats) -> void:
 	
 func start_turn() -> void:
 	player.start_turn()
+	Events.player_turn_started.emit()
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_TURN)
 
 func end_turn() -> void:

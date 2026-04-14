@@ -124,7 +124,7 @@ func play(source: Player, targets: Array[Node]) -> void:
 	}
 	#CombatResolver.push_card(self,  card_context)
 	var previous_result = null
-	for effect:Effect in effects:
+	for effect:Effect in get_effects():
 		previous_result = await effect.execute(source, card_context, previous_result)
 	Events.card_played.emit(self)
 
@@ -201,6 +201,9 @@ func upgrade() -> void:
 
 func get_numeric_entries() -> Array[NumericEntry]:
 	return upgraded_numeric_entries if upgraded else base_numeric_entries
+
+func get_effects() -> Array[Effect]:
+	return upgraded_effects if upgraded else effects
 
 func _get_numeric_value(entry: NumericEntry, player: Player = null, target: Creature = null) -> int:
 	var card_context := {

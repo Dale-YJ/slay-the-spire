@@ -66,6 +66,7 @@ func add_buff(buff_context: ApplyBuffContext) -> int:
 		buff_ui.buff = buff_context.buff_node
 		buff_container.add_child(buff_ui)
 	damage_number_spawner.spawn_buff_label(buff_context.buff_node.buff_name, buff_context.buff_node.type == Buff.Type.BUFF)
+	damage_number_spawner.spawn_buff_icon(buff_context.buff_node.icon)
 	after_applied_buff.emit(buff_context)
 	return buff_stacks + buff_context.amount
 
