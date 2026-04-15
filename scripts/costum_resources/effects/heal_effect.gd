@@ -15,6 +15,10 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 		for i in range(repeat_count):
 			var heal_amount = value
 			total_heal += source.heal(HealContext.new(source, target, heal_amount))
-			await source.get_tree().create_timer(0.2).timeout
+			if animation_name and source is Player:
+				source.animate_player(animation_name)
+				await source.get_tree().create_timer(animation_delay).timeout
+			else:
+				await source.get_tree().create_timer(0.1).timeout
 	return total_heal
 	

@@ -35,6 +35,11 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 			cards = source.get_hand_cards()
 		_:
 			cards = []
+	if animation_name and source is Player:
+		source.animate_player(animation_name)
+		await source.get_tree().create_timer(animation_delay).timeout
+	else:
+		await source.get_tree().create_timer(0.1).timeout
 	if all:
 		for card: Card in cards:
 			get_callback(source).call(card)

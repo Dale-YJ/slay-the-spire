@@ -5,6 +5,8 @@ extends Effect
 
 func apply(source: Node, _targets: Array[Node], card_context: Dictionary, previous_result: Variant = null) -> Variant:
 	var value = draw_card_provider.get_value(previous_result, card_context)
+	if animation_name and source is Player:
+		source.animate_player(animation_name)
 	if source is Player:
 		for i in range(value):
 			var drawn = await source.draw_card(DrawCardContext.new(source, source, 1))

@@ -129,7 +129,20 @@ func play(source: Player, targets: Array[Node]) -> void:
 	#if enchantment:
 		#enchantment.on_play(source, targets)
 	#Events.card_played.emit(self)
-	CombatResolver.push_card(self, card_context)
+	#CombatResolver.push_card(self, card_context)
+	# 自动打出的卡牌的目标可能无效，直接不执行
+	if targets.any(func(enemy: Node): return !is_instance_valid(enemy)):
+		return
+	else:
+		source.card_resolver.push_card(self, card_context)
+	var cost = 0 if first_play_free else get_cost()
+	source.use_energy(cost)
+	first_play_free = false
+
+func on_played(source: Player, targets: Array[Node]) -> void:
+	if enchantment:
+		enchantment.on_play(source, targets)
+	# e.g.暴走:每打出一次伤害提高5
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass

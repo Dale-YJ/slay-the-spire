@@ -97,6 +97,9 @@ func lose_health(_context: Context) -> int:
 	
 func take_damage(_context: Context) -> int:
 	return 0
+	
+func take_damage_without_signals(_amount: int) -> int:
+	return 0
 
 func die() -> void:
 	pass

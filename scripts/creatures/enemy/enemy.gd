@@ -187,6 +187,20 @@ func take_damage(context: Context) -> int:
 		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
 		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
 	return actual_damage
+
+func take_damage_without_signals(amount: int) -> int:
+	if stats.health <= 0:
+		return 0
+	var actual_damage := stats.take_damage(amount)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and amount != 0)
+	
+	if stats.health <= 0:
+		die()
+	elif actual_damage > 0:
+		spine_anim_state.set_animation(enemy_ai.get_hurt_animation_name(), true, 0)
+		spine_anim_state.add_animation(enemy_ai.get_idle_animation_name(), 0, true, 0)
+	return actual_damage
+
 	
 func _on_area_entered(_area: Area2D) -> void:
 	reticles.visible = true

@@ -8,6 +8,10 @@ var effects: Array[Effect]
 # 当前执行到第n个效果
 var effect_index: int = 0
 
+func _init(card_: Card, context_: Dictionary) -> void:
+	card = card_
+	context = context_
+	effect_index = 0 
 
 func is_finished() -> bool:
 	return effect_index >= card.effects.size()

@@ -17,5 +17,10 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 		if block_formula:
 			block += block_formula.calculate(target)
 		target.gain_block(GainBlockContext.new(source, target, block, modifiers, no_modifiers))
+		if animation_name and source is Player:
+			source.animate_player(animation_name)
+			await source.get_tree().create_timer(animation_delay).timeout
+		else:
+			await source.get_tree().create_timer(0.1).timeout
 	return null
 	

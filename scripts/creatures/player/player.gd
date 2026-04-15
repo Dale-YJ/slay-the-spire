@@ -10,6 +10,7 @@ signal after_draw_card(context: DrawCardContext)
 @export var deck_view: DeckView
 @export var discover_view: DiscoverCardView
 @export var agent: PlayerHandler
+@export var card_resolver: CombatResolver
 
 @onready var hitbox: CollisionShape2D = $CollisionShape2D
 
@@ -20,6 +21,8 @@ var spine_manager: SpineManager
 var attack_played_this_turn := 0
 var skill_played_this_turn := 0
 var energy_used_this_turn := 0
+
+var dead := false
 
 func _ready() -> void:
 	mouse_entered.connect(_on_mouse_entered)
@@ -75,6 +78,7 @@ func get_block() -> int:
 	return stats.block
 	
 func die() -> void:
+	dead = true
 	health_bar.hide()
 	buff_container.hide()
 	spine_anim_state.set_animation("die", false, 0)
@@ -139,6 +143,20 @@ func take_damage(context: Context) -> int:
 		spine_anim_state.set_animation("hurt", false, 0)
 		spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	return actual_damage
+
+func take_damage_without_signals(amount: int) -> int:
+	if stats.health <= 0:
+		return 0
+	var actual_damage := stats.take_damage(amount)
+	damage_number_spawner.spawn_damage_label(actual_damage, actual_damage == 0 and amount != 0)
+	if stats.health <= 0:
+		die()
+	elif actual_damage != 0:
+		Events.player_hit.emit()
+		spine_anim_state.set_animation("hurt", false, 0)
+		spine_anim_state.add_animation("idle_loop", 0, true, 0)
+	return actual_damage
+
 
 func put_card_in_discard_pile(card: Card) -> void:
 	agent.put_card_in_discard_pile(card)
@@ -224,21 +242,32 @@ func _update_player() -> void:
 	_update_stats()
 	name_label.text = stats.character_name
 
+func use_energy(amount: int) -> void:
+	stats.energy -= amount
+	energy_used_this_turn += amount
+
 func _on_card_played(card: Card) -> void:
-	var cost = 0 if card.first_play_free else card.get_cost()
-	card.first_play_free = false
-	energy_used_this_turn += cost
-	stats.energy -= cost	
 	
 	if card.type == Card.Type.ATTACK:
 		attack_played_this_turn += 1
-		spine_anim_state.set_animation("attack", false, 0)
-		spine_anim_state.add_animation("idle_loop", 0, true, 0)
-	else:
-		if card.type == Card.Type.SKILL:
-			skill_played_this_turn += 1
-		spine_anim_state.set_animation("cast", false, 0)
-		spine_anim_state.add_animation("idle_loop", 0, true, 0)
+		#spine_anim_state.set_animation("attack", false, 0)
+		#spine_anim_state.add_animation("idle_loop", 0, true, 0)
+	elif card.type == Card.Type.SKILL:
+		skill_played_this_turn += 1
+		#spine_anim_state.set_animation("cast", false, 0)
+		#spine_anim_state.add_animation("idle_loop", 0, true, 0)
+
+func animate_attack() -> void:
+	spine_anim_state.set_animation("attack", false, 0)
+	spine_anim_state.add_animation("idle_loop", 0, true, 0)
+	
+func animate_cast() -> void:
+	spine_anim_state.set_animation("cast", false, 0)
+	spine_anim_state.add_animation("idle_loop", 0, true, 0)
+
+func animate_player(anim_name: String) -> void:
+	spine_anim_state.set_animation(anim_name, false, 0)
+	spine_anim_state.add_animation("idle_loop", 0, true, 0)
 	
 func _on_mouse_entered() -> void:
 	show_name()

@@ -27,7 +27,7 @@ func get_modifier() -> Array[Modifier]:
 func _on_after_take_damage(context: Context) -> void:
 	# 不会触发 before_take_damage
 	if context.source is Creature:
-		context.source.stats.take_damage(stacks)
+		context.source.take_damage_without_signals(stacks)
 
 func get_description() -> String:
 	return description.format({"stacks": stacks})

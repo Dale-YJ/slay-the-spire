@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bpxa77yfyyws0" path="res://scenes/rooms/combat_room/combat_ui/discover_card_view.tscn" id="15_4hrnf"]
 [ext_resource type="PackedScene" uid="uid://bijk3yg4btssm" path="res://scenes/ui/deck_view.tscn" id="15_hylje"]
 [ext_resource type="Texture2D" uid="uid://bnlf5ynahsy8u" path="res://images/rooms/underdocks/underdocks_02_a.png" id="15_s0f1l"]
+[ext_resource type="PackedScene" uid="uid://v5eu53rlyybk" path="res://scenes/rooms/combat_room/combat_resolver.tscn" id="16_4hrnf"]
 [ext_resource type="Texture2D" uid="uid://del54pxobtgf8" path="res://images/rooms/underdocks/underdocks_04_a.png" id="16_tey1o"]
 [ext_resource type="Texture2D" uid="uid://c6r8xp7wi3hkh" path="res://images/rooms/underdocks/underdocks_05_a.png" id="17_albe3"]
 [ext_resource type="Script" uid="uid://cqlaav8vqwmad" path="res://scripts/creatures/player/player_handler.gd" id="18_7rams"]
@@ -184,6 +185,8 @@ visible = false
 [node name="DiscoverCardView" parent="CombatUI" unique_id=1432431847 instance=ExtResource("15_4hrnf")]
 visible = false
 
+[node name="CombatResolver" parent="CombatUI" unique_id=1563317517 instance=ExtResource("16_4hrnf")]
+
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=919668335]
 layer = 2
 
@@ -284,13 +287,14 @@ position = Vector2(959, 310)
 shape = SubResource("RectangleShape2D_vujjl")
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." unique_id=1710440414 node_paths=PackedStringArray("hand_selector", "deck_view", "discover_view", "agent") instance=ExtResource("19_ry3up")]
+[node name="Player" parent="." unique_id=1710440414 node_paths=PackedStringArray("hand_selector", "deck_view", "discover_view", "agent", "card_resolver") instance=ExtResource("19_ry3up")]
 position = Vector2(402, 520)
 stats = ExtResource("2_7btib")
 hand_selector = NodePath("../CombatUI/HandSelelctor")
 deck_view = NodePath("../CardPileView/InspectPileView")
 discover_view = NodePath("../CombatUI/DiscoverCardView")
 agent = NodePath("../PlayerHandler")
+card_resolver = NodePath("../CombatUI/CombatResolver")
 
 [node name="EnemyHandler" type="Node2D" parent="." unique_id=385461736]
 script = ExtResource("20_646qw")
