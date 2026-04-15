@@ -9,7 +9,6 @@ const CARD_INSPECT_UI = preload("res://scenes/ui/card_inspect_ui.tscn")
 var _stack: Array[ResolutionEntry] = []
 var is_resolving: bool = false : set = _set_resolving
 
-var previous_result = null
 var current_entry: ResolutionEntry : set = _set_current_entry
 
 func _ready() -> void:
@@ -25,7 +24,7 @@ func pop_card_ui_in_stack() -> void:
 	if card_resolve_stack.get_child_count() != 0:
 		card_resolve_stack.get_child(-1).queue_free()
 
-# 将卡牌加入结算栈，（卡牌调用play时加入）
+# 将卡牌加入结算栈（卡牌调用play时加入）
 func push_card(card: Card, context: Dictionary):
 	var entry = ResolutionEntry.new(card, context)
 	
@@ -40,6 +39,17 @@ func _resolve():
 	is_resolving = true
 	while _stack.size() > 0:
 		current_entry = _stack[-1]
+		
+		# 自动打出的卡牌的目标可能无效
+		# 目前的的解决方法是直接不执行效果
+		# 好像还有可能出现对previous_freed对象调用effect的情况，但是我没法稳定复现
+		if !current_entry.is_entry_available():
+			_stack.pop_back()
+			pop_card_ui_in_stack()
+			_on_card_finished(current_entry)
+			await get_tree().create_timer(0.7).timeout
+			continue
+			
 		# 卡牌所有效果完成后移出调用栈
 		if current_entry.is_finished():
 			current_entry.card.on_played(current_entry.context["player"], current_entry.context["targets"])
@@ -48,16 +58,18 @@ func _resolve():
 			pop_card_ui_in_stack()
 			
 			_on_card_finished(current_entry)
-			await get_tree().create_timer(0.5).timeout
+			# 每张卡牌结束完等待一段时间
+			# ! 绝对不能太长，
+			await get_tree().create_timer(0.7).timeout
 			continue
-		await _execute_effect(current_entry.get_current_effect(), current_entry.context)
+			
+		current_entry.previous_result =  await _execute_effect(current_entry.get_current_effect(), current_entry.context, current_entry.previous_result)
 		if _should_stop():
 			_clear_stack()
 			break
 		else:
-			# 稍微等待一段时间，防止效果执行太快
-			#await get_tree().create_timer(0.1).timeout
 			await get_tree().process_frame
+			
 		# 移动到下一个效果
 		current_entry.effect_index += 1
 	is_resolving = false
@@ -74,12 +86,11 @@ func _should_stop() -> bool:
 	var player_dead = (get_tree().get_first_node_in_group("ui_player") as Player).dead
 	return all_enemies_dead or player_dead
 
-func _execute_effect(effect: Effect, context: Dictionary) -> void:
+func _execute_effect(effect: Effect, context: Dictionary, previous_result: Variant) -> Variant:
 	# 如果execute是同步函数会直接忽略await
-	previous_result = await effect.execute(context.get("player"), context)
+	return await effect.execute(context.get("player"), context, previous_result)
 	
 func _on_card_finished(entry: ResolutionEntry) -> void:
-	previous_result = null
 	Events.card_played.emit(entry.card)
 
 func _set_current_entry(value: ResolutionEntry) -> void:

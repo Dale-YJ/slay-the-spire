@@ -8,6 +8,8 @@ var effects: Array[Effect]
 # 当前执行到第n个效果
 var effect_index: int = 0
 
+var previous_result: Variant = null
+
 func _init(card_: Card, context_: Dictionary) -> void:
 	card = card_
 	context = context_
@@ -18,6 +20,12 @@ func is_finished() -> bool:
 
 func get_current_effect() -> Effect:
 	return effects[effect_index]
+	
+func is_entry_available() -> bool:
+	var targets: Array[Node] = context["targets"]
+	if targets.any(func(enemy): return !is_instance_valid(enemy)):
+		return false
+	return true
 
 func _set_card(value: Card) -> void:
 	card = value

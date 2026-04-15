@@ -130,11 +130,8 @@ func play(source: Player, targets: Array[Node]) -> void:
 		#enchantment.on_play(source, targets)
 	#Events.card_played.emit(self)
 	#CombatResolver.push_card(self, card_context)
-	# 自动打出的卡牌的目标可能无效，直接不执行
-	if targets.any(func(enemy: Node): return !is_instance_valid(enemy)):
-		return
-	else:
-		source.card_resolver.push_card(self, card_context)
+
+	source.card_resolver.push_card(self, card_context)
 	var cost = 0 if first_play_free else get_cost()
 	source.use_energy(cost)
 	first_play_free = false

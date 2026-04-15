@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="1_6dnus"]
 [ext_resource type="Script" uid="uid://jvpf65gf7yuq" path="res://scripts/costum_resources/card_pile.gd" id="2_pcwuu"]
+[ext_resource type="Resource" uid="uid://2t6dsuhi1es4" path="res://entities/cards/colorless/拳斗.tres" id="7_e5arj"]
 [ext_resource type="Resource" uid="uid://cd01pkgiwrarp" path="res://entities/cards/ironclad/地狱狂徒.tres" id="9_xe1fr"]
 [ext_resource type="Resource" uid="uid://by1y0dacb0le4" path="res://entities/cards/ironclad/全身撞击.tres" id="10_1lg0p"]
 [ext_resource type="Resource" uid="uid://rfrswfbanfy" path="res://entities/cards/ironclad/打击.tres" id="11_sdqn1"]
@@ -10,5 +11,5 @@
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([ExtResource("9_xe1fr"), ExtResource("10_1lg0p"), ExtResource("11_sdqn1"), ExtResource("12_4bseq"), ExtResource("11_sdqn1"), ExtResource("37_0nu07"), ExtResource("37_0nu07")])
+cards = Array[ExtResource("1_6dnus")]([ExtResource("9_xe1fr"), ExtResource("10_1lg0p"), ExtResource("11_sdqn1"), ExtResource("12_4bseq"), ExtResource("11_sdqn1"), ExtResource("37_0nu07"), ExtResource("37_0nu07"), ExtResource("7_e5arj")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

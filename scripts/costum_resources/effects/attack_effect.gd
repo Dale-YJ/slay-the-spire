@@ -17,6 +17,7 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 	var repeat_count = repeat
 	if repeat_count_provider:
 		repeat_count = repeat_count_provider.get_value(previous_result, card_context)
+		
 	for target: Creature in targets:
 		for i in range(repeat_count):
 			var damage = value
