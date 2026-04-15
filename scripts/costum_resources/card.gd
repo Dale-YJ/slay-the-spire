@@ -123,12 +123,13 @@ func play(source: Player, targets: Array[Node]) -> void:
 		"targets": targets
 	}
 	#CombatResolver.push_card(self,  card_context)
-	var previous_result = null
-	for effect:Effect in get_effects():
-		previous_result = await effect.execute(source, card_context, previous_result)
-	if enchantment:
-		enchantment.on_play(source, targets)
-	Events.card_played.emit(self)
+	#var previous_result = null
+	#for effect:Effect in get_effects():
+		#previous_result = await effect.execute(source, card_context, previous_result)
+	#if enchantment:
+		#enchantment.on_play(source, targets)
+	#Events.card_played.emit(self)
+	CombatResolver.push_card(self, card_context)
 
 func apply_effects(_source: Player, _targets: Array[Node]) -> void:
 	pass

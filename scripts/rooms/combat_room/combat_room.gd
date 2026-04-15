@@ -43,7 +43,8 @@ func start_combat() -> void:
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_COMBAT)
 
 func _on_add_card_pressed() -> void:
-	player_handler.draw_card()
+	var card = player_handler.draw_card()
+	player_handler.add_card_to_hand(card)
 
 func _on_child_order_changed() -> void:
 	if enemy_handler.get_child_count() == 0 and is_instance_valid(relics):

@@ -55,6 +55,11 @@ var buff_data = {
 		"name": "滑溜",
 		"description": "下次失去生命值时，只会失去1点生命",
 		"icon": preload("res://images/powers/slippery_power.png")
+	},
+	"地狱狂徒":{
+		"name": "地狱狂徒",
+		"description": "每当你抽到名字中有“打击”的牌时，对一名随机敌人打出这张牌。",
+		"icon": preload("res://images/powers/hellraiser_power.png")
 	}
 }
 
@@ -69,7 +74,8 @@ var buff_scene = {
 	"壁垒": BarricadeBuff,
 	"无法抽牌": NoDrawDebuff,
 	"荆棘": ThornsBuff,
-	"滑溜": SlipperyBuff
+	"滑溜": SlipperyBuff,
+	"地狱狂徒": HellRaiserBuff
 }
 
 var keyword_info = {

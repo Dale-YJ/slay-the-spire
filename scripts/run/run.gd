@@ -81,7 +81,8 @@ func _start_run() -> void:
 	_show_map()
 
 func _setup_top_bar() -> void:
-	top_bar.run_stats = stats   
+	top_bar.run_stats = stats  
+	top_bar.character_stats = character 
 	top_bar.initialize(character)
 	top_bar.deck_view_requested.connect(deck_view.show_card_pile.bind("你在战斗中将会使用这里的所有卡牌。", false))
 	top_bar.relic_handler.add_relic(character.starting_relic)

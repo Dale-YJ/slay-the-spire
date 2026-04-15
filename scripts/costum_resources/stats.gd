@@ -29,8 +29,10 @@ func take_damage(damage: int) -> int:
 	health -= actual_damage
 	return actual_damage
 	
-func heal(amount: int) -> void:
+func heal(amount: int) -> int:
 	health += amount
+	return amount
+
 
 #资源只加载一次，所以需要复制以附加到不同的实体上
 func create_instance() -> Stats:

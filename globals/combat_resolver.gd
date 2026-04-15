@@ -43,7 +43,7 @@ func _should_stop() -> bool:
 
 func _execute_effect(effect: Effect, context: Dictionary) -> void:
 	# 如果execute是同步函数会直接忽略await
-	previous_result = await effect.execute(context.get("player"))
+	previous_result = await effect.execute(context.get("player"), context)
 	
 func _on_card_finished(entry: ResolutionEntry) -> void:
 	previous_result = null

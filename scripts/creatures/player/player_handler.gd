@@ -39,15 +39,21 @@ func draw_card() -> Card:
 	if hand_manager.get_child_count() >= 10:
 		return null
 	var card = char_stats.draw_pile.draw_card()
-	hand_manager.add_card(card)
-	hand_manager.set_cards()
+	
 	reshuffle_deck_from_discard_pile()
 	return card
 
+func add_card_to_hand(card: Card) -> void:
+	if card:
+		hand_manager.add_card(card)
+		hand_manager.set_cards()
+		
 func draw_cards(amount: int) -> void:
 	var tween := create_tween()
 	for i in range(amount):
-		tween.tween_callback(draw_card)
+		tween.tween_callback(func():
+			player.draw_card(DrawCardContext.new(player, null, 1))
+		)
 		tween.tween_interval(HAND_DRAW_INTERVAL)
 	
 	tween.finished.connect(

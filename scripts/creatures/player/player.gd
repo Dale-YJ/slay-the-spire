@@ -3,7 +3,7 @@ extends Creature
 
 # 玩家专属信号
 signal before_draw_card(context: DrawCardContext)
-signal after_draw_card(card: Card)
+signal after_draw_card(context: DrawCardContext)
 
 @export var stats: CharacterStats : set = _set_char_stats
 @export var hand_selector: HandSelector
@@ -85,7 +85,9 @@ func draw_card(context: DrawCardContext) -> int:
 	before_draw_card.emit(context)
 	if context.amount != 0:
 		var card: Card = agent.draw_card()
-		after_draw_card.emit(card)
+		context.card = card
+		after_draw_card.emit(context)
+		agent.add_card_to_hand(context.card)
 	return context.amount
 	
 #func draw_cards(context: DrawCardContext) -> void:
