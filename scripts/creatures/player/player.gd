@@ -42,7 +42,7 @@ func speech(text: String, time: float = 2.5) -> void:
 	#buff_container.add_child(buff_ui)
 
 func discover_card(context: DiscoverContext) -> void:
-	var availabel_cards := CardPool.get_discoverable_cards(context.color, context.type, context.rarity)
+	var availabel_cards := ItemPool.get_discoverable_cards(context.color, context.type, context.rarity)
 	availabel_cards.shuffle()
 	# 随机三张
 	var discovered_cards := availabel_cards.slice(0, 3)

@@ -39,39 +39,44 @@ func _resolve():
 	is_resolving = true
 	while _stack.size() > 0:
 		current_entry = _stack[-1]
-		
 		# 自动打出的卡牌的目标可能无效
 		# 目前的的解决方法是直接不执行效果
 		# 好像还有可能出现对previous_freed对象调用effect的情况，但是我没法稳定复现
 		if !current_entry.is_entry_available():
+			
 			_stack.pop_back()
 			pop_card_ui_in_stack()
+			
 			_on_card_finished(current_entry)
-			await get_tree().create_timer(0.7).timeout
+			
+			await get_tree().create_timer(0.3).timeout
 			continue
 			
 		# 卡牌所有效果完成后移出调用栈
 		if current_entry.is_finished():
+			
 			current_entry.card.on_played(current_entry.context["player"], current_entry.context["targets"])
 			
 			_stack.pop_back()
 			pop_card_ui_in_stack()
 			
 			_on_card_finished(current_entry)
-			# 每张卡牌结束完等待一段时间
-			# ! 绝对不能太长，
-			await get_tree().create_timer(0.7).timeout
+			# 每张卡牌开始执行后等待一段时间
+			await get_tree().create_timer(0.3).timeout
 			continue
 			
 		current_entry.previous_result =  await _execute_effect(current_entry.get_current_effect(), current_entry.context, current_entry.previous_result)
+		
 		if _should_stop():
 			_clear_stack()
 			break
 		else:
-			await get_tree().process_frame
+			#await get_tree().process_frame
+			await get_tree().create_timer(0.2).timeout
 			
 		# 移动到下一个效果
 		current_entry.effect_index += 1
+		
 	is_resolving = false
 	
 func _clear_stack() -> void:

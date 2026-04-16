@@ -128,7 +128,7 @@ func handle_room_full_of_cheese_op1()->void:
 		
 		var newcards: Array[Card]
 		var Randomcards: Array[Card]
-		Randomcards=CardPool.get_draftable_cards(char_stats.color,CardPool.type_mask,0b00001)
+		Randomcards=ItemPool.get_draftable_cards(char_stats.color,ItemPool.card_type_mask, Card.Rarity.COMMON)
 		Randomcards.shuffle()
 		
 		var max_cards = 8
@@ -285,7 +285,7 @@ func handle_brain_leech_op2()->void:
 		deck_view.back_button.hide()
 		var newcards: Array[Card]
 		var Randomcards: Array[Card]
-		Randomcards=CardPool.get_draftable_cards(char_stats.color,CardPool.type_mask,CardPool.rarity_mask)
+		Randomcards=ItemPool.get_draftable_cards_by_color(char_stats.color)
 		Randomcards.shuffle()
 		
 		var max_cards = 5

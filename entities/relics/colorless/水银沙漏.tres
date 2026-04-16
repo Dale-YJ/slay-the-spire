@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_v7dqv"]
 [ext_resource type="Script" uid="uid://n0lvv0axssla" path="res://entities/relics/colorless/水银沙漏.gd" id="2_ww2e6"]
 [ext_resource type="Script" uid="uid://bhhtjppe5dfcx" path="res://scripts/costum_resources/effects/damage_effect.gd" id="3_jbpcq"]
-[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="3_jkgan"]
 
 [sub_resource type="Resource" id="Resource_b2yia"]
 script = ExtResource("2_v7dqv")
@@ -21,11 +20,11 @@ metadata/_custom_type_script = "uid://bhhtjppe5dfcx"
 
 [resource]
 script = ExtResource("2_ww2e6")
-sound = ExtResource("3_jkgan")
 relic_name = "水银沙漏"
 id = "mercury_hourglass"
 icon = ExtResource("1_ww2e6")
 description = "回合开始时，对所有敌人照成3点伤害"
-relic_type = 14
+rarity = 2
+relic_type = 10
 effects = Array[ExtResource("1_xu1y0")]([SubResource("Resource_2tcfg")])
 metadata/_custom_type_script = "uid://bvf88v88tbaks"

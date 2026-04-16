@@ -36,7 +36,7 @@ func apply(_source: Node, targets: Array[Node], card_context: Dictionary, previo
 				for i in range(value):
 					cards_to_add.append(card.duplicate())
 		CardSource.RANDOM_FROM_POOL:
-			var cards :Array[Card] = CardPool.get_discoverable_cards(card_filter.color, card_filter.type, card_filter.rarity)
+			var cards :Array[Card] = ItemPool.get_discoverable_cards(card_filter.color, card_filter.type, card_filter.rarity)
 			cards.shuffle()
 			for i in range(value):
 				cards_to_add.append(cards[i].duplicate())

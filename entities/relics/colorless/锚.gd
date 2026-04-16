@@ -1,6 +1,5 @@
 extends Relic
 
-@export var blocks: int
 var used = false
 
 func initialize_relic(_owner: RelicUI) -> void:
