@@ -8,7 +8,7 @@ func add_buff(buff_context: ApplyBuffContext) -> Buff:
 	buff_node.buff_resource = buff_resource
 	var exist_buff: Buff = null;
 	for child: Buff in get_children():
-		if child.buff_name == buff_node.buff_name:
+		if child.buff_name == buff_resource.buff_name:
 			exist_buff = child
 			break
 	if exist_buff:

@@ -18,11 +18,5 @@ func get_modifier() -> Array[Modifier]:
 	var modifier := Modifier.new(Enums.NumericType.BLOCK, stacks, 1.0, null)
 	return [modifier]
 	
-func remove_stack(amount: int):
-	stacks -= amount
-	if stacks == 0:
-		queue_free()
-	stack_changed.emit()
-	
 func _on_before_gain_block(context: Context) -> void:
 	context.modifiers.append(Modifier.new(Enums.NumericType.BLOCK, stacks, 1.0, null))

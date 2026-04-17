@@ -19,11 +19,5 @@ func get_modifier() -> Array[Modifier]:
 func get_description() -> String:
 	return description.format({"stacks": stacks})
 
-func remove_stack(amount: int):
-	stacks -= amount
-	if stacks == 0:
-		queue_free()
-	stack_changed.emit()
-
 func _on_before_attack(context: Context) -> void:
 	context.modifiers.append(Modifier.new(Enums.NumericType.DAMAGE, stacks, 1.0, null))

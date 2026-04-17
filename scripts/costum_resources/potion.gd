@@ -33,5 +33,6 @@ enum COLOR {
 @export var effects: Array[Effect]
 
 func play(source: Node, targets: Array[Node]) -> void:
+	var previous_result: Variant = null
 	for effect: Effect in effects:
-		await effect.execute(source, {"targets": targets}, null)
+		previous_result = await effect.execute(source, {"targets": targets, "player": source}, previous_result)

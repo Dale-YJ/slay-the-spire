@@ -10,6 +10,7 @@ enum SourceType{
 	ATTACK_PLAYED_THIS_TURN, # 根据本回合打出的攻击牌
 	SKILL_PLAYED_THIS_TURN,
 	ENERGY_USED_THIS_TURN,
+	PLAYER_MAX_HEALTH, # 玩家最大生命
 	CUSTOM, # 自定义（应该不需要这么复杂的东西，暂时不实现
 }
 
@@ -57,6 +58,10 @@ func get_value(previous_result: Variant = null, context: Dictionary = {}) -> int
 			var player: Player = context.get("player")
 			if player:
 				return _get_value(player.energy_used_this_turn)
+		SourceType.PLAYER_MAX_HEALTH:
+			var player: Player = context.get("player")
+			if player:
+				return _get_value(player.stats.max_health)
 		SourceType.CUSTOM:
 			printerr("未实现")
 			return 0

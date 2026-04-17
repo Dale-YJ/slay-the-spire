@@ -51,7 +51,7 @@ func discover_card(context: DiscoverContext) -> void:
 		put_card_in_hand(card)
 	
 	
-func select_hand(context: ChooseCardContext) -> void:
+func select_hand(context: ChooseCardContext) -> int:
 	var selected: Array[Card]
 	agent.hide_hand()
 	agent.disable_hand()
@@ -64,12 +64,14 @@ func select_hand(context: ChooseCardContext) -> void:
 	agent.update_hand()
 	agent.disable_hand(false)
 	agent.show_hand()
+	return len(selected)
 
-func select_deck(context: ChooseCardContext) -> void:
+func select_deck(context: ChooseCardContext) -> int:
 	var selected: Array[Card]
 	selected = await deck_view.select_card_pile(context.cards, context.min_select, context.max_select, context.title, context.selection_mode)
 	for card: Card in selected:
 		context.callback.call(card)
+	return len(selected)
 
 func gain_block(context: Context) -> void:
 	before_gain_block.emit(context)
