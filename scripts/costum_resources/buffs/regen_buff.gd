@@ -1,5 +1,5 @@
 # 记得改类名
-class_name MyBuff
+class_name RegenBuff
 extends Buff
 
 

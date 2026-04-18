@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://twvroh" path="res://images/atlases/card_atlas.sprites/ironclad/hellraiser.tres" id="6_ewnxv"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="7_y7rga"]
 [ext_resource type="Texture2D" uid="uid://w1mk8x" path="res://images/atlases/card_atlas.sprites/ironclad/strike_ironclad.tres" id="8_t8brg"]
-[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="9_au0bv"]
 [ext_resource type="Script" uid="uid://bgxakc1nj11hm" path="res://scripts/costum_resources/effects/loss_health_effect.gd" id="10_cyjvc"]
 [ext_resource type="Script" uid="uid://c6kvghrfcdtp7" path="res://scripts/costum_resources/effects/gain_energy_effect.gd" id="11_lmdw5"]
 [ext_resource type="Resource" uid="uid://b56gw7xhi8pe1" path="res://entities/enchantments/伶俐.tres" id="12_bsqa6"]
@@ -88,6 +87,9 @@ target_type = 2
 animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
+[sub_resource type="Resource" id="Resource_t8brg"]
+metadata/__load_path__ = "res://audio/SFX/blunt_attack.mp3"
+
 [sub_resource type="Resource" id="Resource_hrq5q"]
 script = ExtResource("4_7hj0v")
 fixed_value = 9
@@ -122,7 +124,7 @@ draftable = false
 effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_uhv6p")])
 portrait = ExtResource("8_t8brg")
 base_description = "[center]造成{damage}点伤害。[/center]"
-sound = ExtResource("9_au0bv")
+sound = SubResource("Resource_t8brg")
 base_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_sjnru")])
 upgraded_target = 1
 upgraded_cost = 1
@@ -238,6 +240,9 @@ upgraded_description = "[center]失去{lose_health}点生命。[/center][p][cent
 upgraded_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_abhjn"), SubResource("Resource_6aaeb")])
 upgraded_effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_0h1uv"), SubResource("Resource_co18p")])
 
+[sub_resource type="Resource" id="Resource_au0bv"]
+metadata/__load_path__ = "res://audio/SFX/blunt_attack.mp3"
+
 [sub_resource type="Resource" id="Resource_2qpn7"]
 script = ExtResource("1_6dnus")
 id = "打击"
@@ -248,7 +253,7 @@ draftable = false
 effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_uhv6p")])
 portrait = ExtResource("8_t8brg")
 base_description = "[center]造成{damage}点伤害。[/center]"
-sound = ExtResource("9_au0bv")
+sound = SubResource("Resource_au0bv")
 base_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_sjnru")])
 upgraded_target = 1
 upgraded_cost = 1
