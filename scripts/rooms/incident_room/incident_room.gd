@@ -327,7 +327,8 @@ func handle_aroma_of_chaos_op1()->void:
 			print(countop)
 			return	
 		loadEnchantment("res://entities/enchantments/")
-		var i =char_stats.deck.cards.find(newcards)
+		#var i =char_stats.deck.cards.find(newcards)
+		var i =char_stats.deck.cards.find(newcards[0])
 		
 		char_stats.deck.cards[i].set_echantment(enchantments[0])
 		
