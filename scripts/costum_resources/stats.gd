@@ -10,6 +10,13 @@ signal stats_changed
 var health: int : set = _set_health
 var block: int : set = _set_block
 
+func _set_max_health(value:int)->void:
+	max_health=value
+	if health>max_health:
+		health=max_health
+
+	stats_changed.emit()
+	
 func _set_health(value: int) -> void:
 	health = clampi(value, 0, max_health)
 	stats_changed.emit()
