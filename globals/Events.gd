@@ -21,6 +21,11 @@ signal potion_aim_started(potion_ui: PotionUI)
 signal potion_aim_ended(potion_ui: PotionUI)
 signal before_potion_used(potion_ui: PotionUI)
 signal after_potion_used(potion_ui: PotionUI)
+## 技能相关
+signal before_skill_played(skill: Skill)
+signal skill_played(skill: Skill)
+signal skill_aim_started(skill_ui: MainSkillUI)
+signal skill_aim_ended(skill_ui: MainSkillUI)
 ## 玩家相关
 # 玩家回合开始抽牌后
 signal player_hand_drawn

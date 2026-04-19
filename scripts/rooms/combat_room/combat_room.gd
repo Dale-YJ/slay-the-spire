@@ -7,13 +7,13 @@ extends Control
 @onready var player_handler: PlayerHandler = $PlayerHandler
 @onready var combat_ui: CombatUI = %CombatUI
 @onready var hand_manager: HandManager = $CombatUI/HandManager
+@onready var combat_resolver: CombatResolver = $CombatUI/CombatResolver
+@onready var main_skill_ui: MainSkillUI = $CombatUI/MainSkill
+
 # 子节点的所有char_stats由该节点分发
 @export var char_stats: CharacterStats: set = _set_char_stats
 @export var music: AudioStream
 @export var relics: RelicHandler
-@onready var combat_resolver: CombatResolver = $CombatUI/CombatResolver
-
-
 
 
 func _ready() -> void:
@@ -42,6 +42,8 @@ func start_combat() -> void:
 	
 	relics.relics_activated.connect(_on_relics_activated)
 	relics.activate_relics_by_trigger_type(Relic.TriggerType.START_OF_COMBAT)
+	
+	main_skill_ui.set_skill(char_stats.main_skill)
 
 func _on_add_card_pressed() -> void:
 	var card = player_handler.draw_card()

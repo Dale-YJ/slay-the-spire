@@ -14,7 +14,7 @@ const FALL_TIME := 2.0
 var agent: Node
 
 func spawn_buff_icon(buff_icon: Texture2D) -> void:
-	var new_texture: TextureRect = TextureRect.new()
+	var new_texture: BuffTextureRect = BuffTextureRect.new()
 	new_texture.texture = buff_icon
 	new_texture.pivot_offset = buff_icon.get_size() / 2
 	new_texture.position = global_position - buff_icon.get_size() / 2
@@ -23,11 +23,12 @@ func spawn_buff_icon(buff_icon: Texture2D) -> void:
 	
 	agent.call_deferred("add_child", new_texture)
 	await new_texture.tree_entered
-	var tween = create_tween()
-	tween.set_parallel(true)
-	tween.tween_property(new_texture, "scale", Vector2(1.0, 1.0), 2.0)
-	tween.tween_property(new_texture, "self_modulate:a", 0.1, 2.0)
-	tween.finished.connect(new_texture.queue_free)
+	new_texture.fade_out()
+	#var tween = create_tween()
+	#tween.set_parallel(true)
+	#tween.tween_property(new_texture, "scale", Vector2(1.0, 1.0), 2.0)
+	#tween.tween_property(new_texture, "self_modulate:a", 0.1, 2.0)
+	#tween.finished.connect(new_texture.queue_free)
 	
 func spawn_buff_label(buff_name: String, is_buff: bool) -> void:
 	var new_label: DamageLabel = DamageLabel.new()

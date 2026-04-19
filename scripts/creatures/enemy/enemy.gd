@@ -148,6 +148,7 @@ func die() -> void:
 	reticles.hide()
 	buff_container.hide()
 	spine_anim_state.set_animation(enemy_ai.get_die_animation_name(), true, 0)
+	Events.enemy_died.emit()
 	spine_manager.animation_completed.connect(
 		func (_x, _y, _z): queue_free()
 	)
