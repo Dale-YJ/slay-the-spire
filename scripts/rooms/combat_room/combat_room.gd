@@ -7,6 +7,7 @@ extends Control
 @onready var player_handler: PlayerHandler = $PlayerHandler
 @onready var combat_ui: CombatUI = %CombatUI
 @onready var hand_manager: HandManager = $CombatUI/HandManager
+@onready var hand_selelctor: HandSelector = %HandSelelctor
 @onready var combat_resolver: CombatResolver = $CombatUI/CombatResolver
 @onready var main_skill_ui: MainSkillUI = $CombatUI/MainSkill
 
@@ -38,6 +39,7 @@ func start_combat() -> void:
 	#
 	combat_ui.char_stats = char_stats
 	hand_manager.char_stats = char_stats
+	hand_selelctor.char_stats = char_stats
 	player.stats = char_stats
 	
 	relics.relics_activated.connect(_on_relics_activated)

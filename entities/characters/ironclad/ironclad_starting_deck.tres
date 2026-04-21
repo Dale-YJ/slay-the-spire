@@ -14,8 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://bbpfskx" path="res://images/atlases/card_atlas.sprites/ironclad/bloodletting.tres" id="13_whuos"]
 [ext_resource type="Script" uid="uid://dd8cefu454sp5" path="res://scripts/costum_resources/effects/draw_card_effect.gd" id="14_cilra"]
 [ext_resource type="Texture2D" uid="uid://bkyract" path="res://images/atlases/card_atlas.sprites/ironclad/pommel_strike.tres" id="15_lm2nt"]
-[ext_resource type="Resource" uid="uid://upuj7jv770uk" path="res://entities/cards/ironclad/欺凌.tres" id="16_t8brg"]
-[ext_resource type="Resource" uid="uid://bwfi2t422lab6" path="res://entities/cards/ironclad/闪电霹雳.tres" id="17_au0bv"]
 [ext_resource type="Resource" uid="uid://b0odwvcj314k2" path="res://entities/cards/ironclad/燃烧契约.tres" id="21_whuos"]
 [ext_resource type="Resource" uid="uid://bdaswd70bkyc2" path="res://entities/cards/ironclad/擒拿.tres" id="22_cyjvc"]
 [ext_resource type="Resource" uid="uid://dpankwujdaqkp" path="res://entities/cards/ironclad/双重打击.tres" id="23_cyjvc"]
@@ -27,6 +25,7 @@
 [ext_resource type="Resource" uid="uid://16qcmvy2hybc" path="res://entities/cards/ironclad/战栗.tres" id="28_jqanm"]
 [ext_resource type="Resource" uid="uid://dwwdbcsdjlfi0" path="res://entities/cards/ironclad/预备打击.tres" id="29_jqanm"]
 [ext_resource type="Resource" uid="uid://cm5u1npu17hc8" path="res://entities/cards/ironclad/血墙.tres" id="29_q88nh"]
+[ext_resource type="Resource" uid="uid://daughd7v5s37" path="res://entities/cards/ironclad/怨恨.tres" id="29_vp0wk"]
 [ext_resource type="Resource" uid="uid://dqldofe3j3ro8" path="res://entities/cards/ironclad/旋风斩.tres" id="30_q88nh"]
 [ext_resource type="Resource" uid="uid://dfotaocwk4uqc" path="res://entities/cards/ironclad/拆卸.tres" id="30_vp0wk"]
 [ext_resource type="Resource" uid="uid://b8v7hogebydh5" path="res://entities/cards/ironclad/暴走.tres" id="31_vp0wk"]
@@ -273,25 +272,6 @@ placeholder = "cards"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_o2bww"]
-script = ExtResource("1_6dnus")
-id = "剑柄打击"
-base_target = 1
-base_cost = 1
-effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_d773o"), SubResource("Resource_x3oof")])
-portrait = ExtResource("15_lm2nt")
-base_description = "[center]造成{damage}点伤害。[/center]
-[center]抽{cards}张牌。[/center]"
-base_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_t1ma7"), SubResource("Resource_eropg")])
-upgraded_target = 1
-upgraded_cost = 1
-upgraded_description = "[center]造成{damage}点伤害。[/center]
-[center]抽{cards}张牌。[/center]"
-upgraded_numeric_entries = Array[ExtResource("2_4bseq")]([SubResource("Resource_qk8fx"), SubResource("Resource_3ma15")])
-upgraded_effects = Array[ExtResource("3_8xmro")]([SubResource("Resource_51t85"), SubResource("Resource_3sncj")])
-upgraded = true
-metadata/_custom_type_script = "uid://br1hibx18tv13"
-
 [sub_resource type="Resource" id="Resource_b05o3"]
 script = ExtResource("1_6dnus")
 id = "剑柄打击"
@@ -416,5 +396,5 @@ metadata/_custom_type_script = "uid://br1hibx18tv13"
 
 [resource]
 script = ExtResource("2_pcwuu")
-cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_jqanm"), SubResource("Resource_vp0wk"), SubResource("Resource_o2bww"), SubResource("Resource_b05o3"), ExtResource("16_t8brg"), ExtResource("17_au0bv"), ExtResource("21_whuos"), ExtResource("22_cyjvc"), ExtResource("23_cyjvc"), ExtResource("24_bsqa6"), ExtResource("25_whuos"), SubResource("Resource_q88nh"), ExtResource("27_cilra"), ExtResource("29_jqanm"), ExtResource("28_jqanm"), ExtResource("29_q88nh"), ExtResource("30_q88nh"), ExtResource("31_vp0wk"), ExtResource("32_2qpn7"), ExtResource("30_vp0wk")])
+cards = Array[ExtResource("1_6dnus")]([SubResource("Resource_jqanm"), SubResource("Resource_vp0wk"), SubResource("Resource_b05o3"), ExtResource("21_whuos"), ExtResource("22_cyjvc"), ExtResource("23_cyjvc"), ExtResource("24_bsqa6"), ExtResource("25_whuos"), SubResource("Resource_q88nh"), ExtResource("27_cilra"), ExtResource("29_jqanm"), ExtResource("28_jqanm"), ExtResource("29_q88nh"), ExtResource("30_q88nh"), ExtResource("31_vp0wk"), ExtResource("32_2qpn7"), ExtResource("30_vp0wk"), ExtResource("29_vp0wk")])
 metadata/_custom_type_script = "uid://jvpf65gf7yuq"

@@ -42,6 +42,7 @@ const CARD_FRAME_RED_MAT = preload("res://materials/cards/frames/card_frame_red_
 @onready var enchantment: TextureRect = %Enchantment
 @onready var enchantment_icon: TextureRect = %EnchantmentIcon
 @onready var enchantment_stack_label: Label = %EnchantmentStackLabel
+@onready var high_light: TextureRect = %HighLight
 
 
 func _set_card(value: Card) -> void:
@@ -136,3 +137,13 @@ func _set_card(value: Card) -> void:
 
 func set_description(text: String) -> void:
 	description_label.text = text
+	
+func set_hightlight(highlight: bool = false, gold: bool = false) -> void:
+	if highlight:
+		high_light.visible = true
+		if gold:
+			high_light.self_modulate = Color("fff94a")
+		else:
+			high_light.self_modulate = Color("4af3ff")
+	else:
+		high_light.visible = false

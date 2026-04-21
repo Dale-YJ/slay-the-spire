@@ -273,3 +273,9 @@ func set_echantment(enchantment_: Enchantment) -> void:
 
 func can_upgrade() -> bool:
 	return upgradable and !upgraded
+	
+func has_highlight_condition(player: Node, target: Node) -> bool:
+	for effect: Effect in effects:
+		if effect is ConditionalEffect:
+			return effect.is_condition_met(player, target)
+	return false

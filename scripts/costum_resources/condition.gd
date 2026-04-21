@@ -52,3 +52,41 @@ func is_met(_source: Node, target: Node, context: Dictionary) -> bool:
 			return results.any(func(flag): return flag)
 			
 	return false
+
+func is_met_without_context(source: Node, target: Node) -> bool:
+	match type:
+		Type.ALWAYS:
+			return true
+		Type.TARGET_HAS_BUFF:
+			target = (target as Creature)
+			if target:
+				return target.has_buff(extra_params.get("buff_name", ""))
+		Type.TAEGET_BUFF_MORE_THAN_STACKS:
+			var buff: Buff = (target as Creature).get_buff(extra_params.get("buff_name", ""))
+			if buff:
+				return buff.stacks > extra_params.get("stacks", 0)
+		Type.PLAYER_LOSE_HP_THIS_TURN:
+			var player: Player = source as Player
+			if player:
+				return player.health_lost_times_this_turn > 0
+		Type.PLAYER_HAS_BUFF:
+			var player: Player = source as Player
+			if player:
+				return player.has_buff(extra_params.get("buff_name", ""))
+		Type.PLAYER_BUFF_MORE_THAN_STACKS:
+			var player: Player = source as Player
+			if player:
+				var buff: Buff = player.get_buff(extra_params.get("buff_name", ""))
+				if buff:
+					return buff.stacks > extra_params.get("stacks", 0)
+		_:
+			return false
+		
+	if sub_conditions.size() > 0:
+		var results: Array[bool] = sub_conditions.map(func(condiction: Condition): return condiction.is_met_without_context(source, target))
+		if combine_mode == "AND":
+			return results.all(func(flag): return flag)
+		else:
+			return results.any(func(flag): return flag)
+			
+	return false

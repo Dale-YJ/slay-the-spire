@@ -18,6 +18,9 @@ func apply(source: Node, targets: Array[Node], card_context: Dictionary, previou
 			last = await effect.execute(source, card_context, last)
 		return last
 
+func is_condition_met(source: Node, target: Node) -> bool:
+	return condition.is_met_without_context(source, target)
+
 #var target = context.get("primary_target")
 	#if condition.is_met(source, target, context):
 		#var last = previous_result

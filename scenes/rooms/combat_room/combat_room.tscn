@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://jwynhqw8ayou" path="res://images/packed/combat_ui/end_turn_button.png" id="5_w1so4"]
 [ext_resource type="Texture2D" uid="uid://bnnrjotxgq0sx" path="res://images/packed/combat_ui/end_turn_button_glow.png" id="6_m2yy5"]
 [ext_resource type="PackedScene" uid="uid://dlp0rxa1b482m" path="res://scenes/rooms/combat_room/combat_ui/energy_ui.tscn" id="7_htae7"]
-[ext_resource type="Resource" uid="uid://i0cxtaixhmke" path="res://entities/skills/main_skills/终极灾厄.tres" id="7_m2yy5"]
 [ext_resource type="PackedScene" uid="uid://deidb0dmylls" path="res://scenes/hand_manager/hand_manager.tscn" id="8_mj7tc"]
 [ext_resource type="PackedScene" uid="uid://dtc84mfyeh67u" path="res://scenes/ui/card_pile_button.tscn" id="10_7btib"]
 [ext_resource type="Texture2D" uid="uid://ce37xptc8x4au" path="res://images/packed/combat_ui/pile_button_count.png" id="11_hylje"]
@@ -60,7 +59,6 @@ offset_top = 183.0
 offset_right = 348.0
 offset_bottom = 493.0
 scale = Vector2(0.5, 0.5)
-skill = ExtResource("7_m2yy5")
 player = NodePath("../../Player")
 
 [node name="CombatResolver" parent="CombatUI" unique_id=1563317517 instance=ExtResource("16_4hrnf")]
@@ -193,9 +191,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HandSelelctor" parent="CombatUI" unique_id=505773446 instance=ExtResource("13_4hrnf")]
+unique_name_in_owner = true
 visible = false
 
 [node name="DiscoverCardView" parent="CombatUI" unique_id=1432431847 instance=ExtResource("15_4hrnf")]
+unique_name_in_owner = true
 visible = false
 
 [node name="RedFlash" type="CanvasLayer" parent="." unique_id=919668335]
