@@ -10,7 +10,7 @@ const HAND_DISCARD_INTERVAL := 0.25
 
 var char_stats: CharacterStats
 # 抽一张牌的效果，这是为了将回合开始时的抽牌也压入结算栈中
-var draw_card_effect: DrawCardEffect = DrawCardEffect.new()
+var draw_card_effect_with_iteration: IterationEffect = IterationEffect.new()
 var draw_card_context := {
 	"player": null,
 	"targets": []
@@ -18,7 +18,7 @@ var draw_card_context := {
 
 func _ready() -> void:
 	Events.card_played.connect(_on_card_played)
-	draw_card_effect.draw_card_provider = NumericProvider.new(player.stats.cards_per_turn)
+	draw_card_effect_with_iteration.effects = [DrawCardEffect.new()]
 	draw_card_context["player"] = player
 
 func start_battle(char_stats_: CharacterStats) -> void:
@@ -76,7 +76,8 @@ func add_card_to_hand(card: Card) -> void:
 	#)
 
 func draw_cards() -> void:
-	player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect], draw_card_context, func(): Events.player_hand_drawn.emit()))
+	draw_card_effect_with_iteration.count_provider = NumericProvider.new(char_stats.cards_per_turn)
+	player.combat_resolver.execute(ResolutionEntry.new(null, [draw_card_effect_with_iteration], draw_card_context, func(): Events.player_hand_drawn.emit()))
 
 func disable_hand(flag: bool = true) -> void:
 	for child:CardUI in hand_manager.get_children():

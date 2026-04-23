@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="2_k4rjm"]
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="3_uavu1"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_bq1k6"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="5_bq1k6"]
 [ext_resource type="Script" uid="uid://b8qfrs61nmcix" path="res://scripts/costum_resources/effects/apply_buff_effect.gd" id="5_qprqp"]
 [ext_resource type="Texture2D" uid="uid://cj7e5ff" path="res://images/atlases/card_atlas.sprites/ironclad/fight_me.tres" id="6_x0n34"]
 
@@ -46,18 +47,28 @@ placeholder = "stacks_2"
 affected_by = 3
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 
-[sub_resource type="Resource" id="Resource_t5jdc"]
+[sub_resource type="Resource" id="Resource_qprqp"]
+script = ExtResource("2_88w3a")
+fixed_value = 2
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_x0n34"]
 script = ExtResource("2_88w3a")
 fixed_value = 5
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_256kd"]
+[sub_resource type="Resource" id="Resource_t5jdc"]
 script = ExtResource("4_bq1k6")
-repeat = 2
-damage_provider = SubResource("Resource_t5jdc")
+damage_provider = SubResource("Resource_x0n34")
 target_type = 2
 animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_256kd"]
+script = ExtResource("5_bq1k6")
+count_provider = SubResource("Resource_qprqp")
+effects = Array[ExtResource("2_k4rjm")]([SubResource("Resource_t5jdc")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_6olxl"]
 script = ExtResource("2_88w3a")
@@ -85,16 +96,26 @@ metadata/_custom_type_script = "uid://b8qfrs61nmcix"
 
 [sub_resource type="Resource" id="Resource_ohjwm"]
 script = ExtResource("2_88w3a")
-fixed_value = 6
+fixed_value = 2
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
 [sub_resource type="Resource" id="Resource_kyv22"]
+script = ExtResource("2_88w3a")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_o4hov"]
 script = ExtResource("4_bq1k6")
-repeat = 2
-damage_provider = SubResource("Resource_ohjwm")
+damage_provider = SubResource("Resource_kyv22")
 target_type = 2
 animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_xs8hd"]
+script = ExtResource("5_bq1k6")
+count_provider = SubResource("Resource_ohjwm")
+effects = Array[ExtResource("2_k4rjm")]([SubResource("Resource_o4hov")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_lbqyh"]
 script = ExtResource("2_88w3a")
@@ -176,5 +197,5 @@ upgraded_description = "[center]造成{damage}点伤害两次。
 获得{stacks_1}点力量。
 该敌人获得{stacks_2}点力量。[/center]"
 upgraded_numeric_entries = Array[ExtResource("1_vkyqx")]([SubResource("Resource_vujg0"), SubResource("Resource_n24tl"), SubResource("Resource_65pvr")])
-upgraded_effects = Array[ExtResource("2_k4rjm")]([SubResource("Resource_kyv22"), SubResource("Resource_7l43n"), SubResource("Resource_dg7kq")])
+upgraded_effects = Array[ExtResource("2_k4rjm")]([SubResource("Resource_xs8hd"), SubResource("Resource_7l43n"), SubResource("Resource_dg7kq")])
 metadata/_custom_type_script = "uid://br1hibx18tv13"

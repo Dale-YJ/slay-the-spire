@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_3aukq"]
 [ext_resource type="Texture2D" uid="uid://r6jnvrqc1utn" path="res://images/packed/intents/attack/intent_attack_3.png" id="4_oe3fb"]
 [ext_resource type="Script" uid="uid://bces7ijyodhmv" path="res://scripts/costum_resources/intents/attack_sub_intent.gd" id="6_bmosx"]
+[ext_resource type="Script" uid="uid://cgmi6f3o7leik" path="res://scripts/costum_resources/effect.gd" id="7_bmosx"]
+[ext_resource type="Script" uid="uid://c8ly86kb5vc65" path="res://scripts/costum_resources/effects/iteration_effect.gd" id="8_2g6j5"]
 [ext_resource type="Texture2D" uid="uid://cnpcjof4fvvng" path="res://images/packed/intents/attack/intent_attack_4.png" id="8_yjrj0"]
 [ext_resource type="Resource" uid="uid://djvmk3f4ikvji" path="res://entities/cards/status_cards/伤口.tres" id="9_2g6j5"]
 [ext_resource type="Script" uid="uid://cwa7i0gle4vi5" path="res://entities/enemies/vantom/vantom_ai.gd" id="10_27bsf"]
@@ -52,22 +54,27 @@ script = ExtResource("3_aa4qt")
 fixed_value = 6
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_kxb34"]
-script = ExtResource("3_aa4qt")
-fixed_value = 6
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
-[sub_resource type="Resource" id="Resource_qrpuo"]
+[sub_resource type="Resource" id="Resource_3m854"]
 script = ExtResource("3_aa4qt")
 fixed_value = 2
 metadata/_custom_type_script = "uid://dtok21t0ujjui"
 
-[sub_resource type="Resource" id="Resource_oxnlu"]
+[sub_resource type="Resource" id="Resource_kygs6"]
+script = ExtResource("3_aa4qt")
+fixed_value = 6
+metadata/_custom_type_script = "uid://dtok21t0ujjui"
+
+[sub_resource type="Resource" id="Resource_7igu1"]
 script = ExtResource("4_3aukq")
-repeat_count_provider = SubResource("Resource_qrpuo")
-damage_provider = SubResource("Resource_kxb34")
+damage_provider = SubResource("Resource_kygs6")
 target_type = 2
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
+
+[sub_resource type="Resource" id="Resource_u2l8y"]
+script = ExtResource("8_2g6j5")
+count_provider = SubResource("Resource_3m854")
+effects = Array[ExtResource("7_bmosx")]([SubResource("Resource_7igu1")])
+metadata/_custom_type_script = "uid://c8ly86kb5vc65"
 
 [sub_resource type="Resource" id="Resource_buf08"]
 script = ExtResource("3_aa4qt")
@@ -79,7 +86,7 @@ script = ExtResource("6_bmosx")
 damage_provider = SubResource("Resource_xc4vh")
 repeat_provider = SubResource("Resource_buf08")
 icon = ExtResource("4_oe3fb")
-effect = SubResource("Resource_oxnlu")
+effect = SubResource("Resource_u2l8y")
 metadata/_custom_type_script = "uid://bces7ijyodhmv"
 
 [sub_resource type="Resource" id="Resource_mdti4"]

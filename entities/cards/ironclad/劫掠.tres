@@ -34,14 +34,8 @@ target_type = 2
 animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
-[sub_resource type="Resource" id="Resource_tyg2e"]
-script = ExtResource("2_7yjgk")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_asdsb"]
 script = ExtResource("5_o4h2p")
-draw_card_provider = SubResource("Resource_tyg2e")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_fw5xl"]
@@ -49,14 +43,8 @@ script = ExtResource("6_ueh7r")
 type = 7
 metadata/_custom_type_script = "uid://cibjrcipdqbs7"
 
-[sub_resource type="Resource" id="Resource_1bfed"]
-script = ExtResource("2_7yjgk")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_qyn8f"]
 script = ExtResource("5_o4h2p")
-draw_card_provider = SubResource("Resource_1bfed")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_at1dg"]
@@ -77,14 +65,8 @@ target_type = 2
 animation_name = "attack"
 metadata/_custom_type_script = "uid://vkklgv0ma0yf"
 
-[sub_resource type="Resource" id="Resource_nag3s"]
-script = ExtResource("2_7yjgk")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_yxu60"]
 script = ExtResource("5_o4h2p")
-draw_card_provider = SubResource("Resource_nag3s")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_h1e6o"]
@@ -92,14 +74,8 @@ script = ExtResource("6_ueh7r")
 type = 7
 metadata/_custom_type_script = "uid://cibjrcipdqbs7"
 
-[sub_resource type="Resource" id="Resource_bpi4p"]
-script = ExtResource("2_7yjgk")
-fixed_value = 1
-metadata/_custom_type_script = "uid://dtok21t0ujjui"
-
 [sub_resource type="Resource" id="Resource_nofun"]
 script = ExtResource("5_o4h2p")
-draw_card_provider = SubResource("Resource_bpi4p")
 metadata/_custom_type_script = "uid://dd8cefu454sp5"
 
 [sub_resource type="Resource" id="Resource_ph6eh"]
@@ -116,7 +92,7 @@ metadata/_custom_type_script = "uid://dtok21t0ujjui"
 [sub_resource type="Resource" id="Resource_nbhxy"]
 script = ExtResource("1_io38g")
 numeric_provider = SubResource("Resource_hxtnf")
-placeholder = "attack"
+placeholder = "damage"
 affected_by = 2
 metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 

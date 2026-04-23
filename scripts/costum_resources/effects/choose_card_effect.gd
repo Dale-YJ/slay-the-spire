@@ -1,3 +1,5 @@
+## 这个类耦合度太高了
+## @deprecated: 使用SelectCardEffect
 class_name ChooseCardEffect
 extends Effect
 
@@ -17,7 +19,7 @@ enum Callback{
 	DISCARD,
 	FREE_FOR_COMBAT, # 本场战斗免费打出
 	PUT_INTO_HAND,
-	PUT_INTO_HAND_AND_FIRST_PLAY_FREE # 应该重构的但是我懒得改了
+	PUT_INTO_HAND_AND_FIRST_PLAY_FREE 
 }
 
 enum RandomChooseMode{
@@ -58,9 +60,9 @@ func apply(source: Node, _targets: Array[Node], _card_context: Dictionary, _prev
 	match random_choose_mode:
 		RandomChooseMode.NONE:
 			if where == Where.HAND:
-				card_count = await source.select_hand(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, hook, get_selection_mode()))
+				card_count = await source.choose_hand(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, hook, get_selection_mode()))
 			else:
-				card_count = await source.select_deck(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, hook, get_selection_mode()))
+				card_count = await source.choose_deck(ChooseCardContext.new(source, filter_cards(cards), get_hint_text(), min_select, max_select, hook, get_selection_mode()))
 			return card_count
 		RandomChooseMode.ALL:
 			for card: Card in cards:
