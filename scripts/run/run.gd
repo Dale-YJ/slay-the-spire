@@ -73,8 +73,9 @@ func _on_map_room_selected(room: Room) -> void:
 			return
 		Room.Type.TREASURE:
 			scene = TREASURE_SCENE
+			_change_view(scene)
 		Room.Type.SHOP:
-			scene = SHOP_SCENE
+			_on_shop_entered(room)
 		Room.Type.CAMPFIRE:
 			_on_campfire_room_entered(room)
 			return
@@ -84,10 +85,10 @@ func _on_map_room_selected(room: Room) -> void:
 		_:
 			return
 
-	if room.type == Room.Type.SHOP:
-		call_deferred("_change_view_deferred", scene)
-	else:
-		await _change_view(scene)
+	#if room.type == Room.Type.SHOP:
+		#call_deferred("_change_view_deferred", scene)
+	#else:
+	
 
 
 ################实现问号房逻辑####################
@@ -270,16 +271,6 @@ func _change_view(scene: PackedScene) -> Node:
 	if current_room.get_child_count() > 0:
 		current_room.get_child(0).queue_free()
 	
-	# 商店场景特殊处理：使用地图中预加载的资源
-	if scene == SHOP_SCENE:
-		var loaded_scene = map_node.get_shop_scene()
-		if loaded_scene == null:
-			# 如果资源还未加载完成，回退同步加载
-			loaded_scene = load(scene.resource_path)
-		var new_view = loaded_scene.instantiate()
-		current_room.add_child.call_deferred(new_view)
-		return new_view
-	
 	# 其他场景正常处理
 	var new_view := scene.instantiate()
 	current_room.add_child(new_view)
@@ -367,6 +358,7 @@ func _on_campfire_room_entered(room: Room)-> void:
 	capfire_scene.char_stats=character
 	capfire_scene.deck_view = select_deck_view
 	capfire_scene.initialize()
+	Events.campfire_entered.emit(room, stats, character)
 
 	
 func _on_incident_room_entered(room: Room)->void:
@@ -376,4 +368,19 @@ func _on_incident_room_entered(room: Room)->void:
 	incident_scene.run_stats=stats
 	incident_scene.deck_view= select_deck_view
 	incident_scene.init()
+	Events.incident_room_entered.emit(room, stats, character)
+
+func _on_shop_entered(room: Room) -> void:
+	if current_room.get_child_count() > 0:
+		current_room.get_child(0).queue_free()
+	
+	var loaded_scene = map_node.get_shop_scene()
+	if loaded_scene == null:
+		# 如果资源还未加载完成，回退同步加载
+		loaded_scene = load(SHOP_SCENE.resource_path)
+	var new_view = loaded_scene.instantiate()
+	current_room.add_child.call_deferred(new_view)
+	
+	Events.shop_entered.emit(room, stats, character)
+	
 	

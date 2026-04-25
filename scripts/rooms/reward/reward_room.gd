@@ -128,5 +128,5 @@ func _on_card_reward_taken(card:Card)->void:
 	if not character_stats or not card:
 		return
 	#print("DeckBefore:\n%s\n" % character_stats.deck)
-	character_stats.deck.add_card(card)
+	character_stats.add_card_to_deck(card)
 	#print("DeckAfter:\n%s" % character_stats.deck)

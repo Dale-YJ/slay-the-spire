@@ -60,6 +60,7 @@ metadata/_custom_type_script = "uid://cxgxfbwykbp84"
 [resource]
 script = ExtResource("3_3d3gw")
 id = "残酷"
+type = 4
 base_cost = 1
 rarity = 4
 effects = Array[ExtResource("2_mtnuv")]([SubResource("Resource_7wapk")])

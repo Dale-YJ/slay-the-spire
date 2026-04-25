@@ -150,7 +150,7 @@ func play(source: Player, targets: Array[Node], no_callback: bool = false) -> vo
 			on_played(source, targets)
 			)
 		)
-	source.use_energy(energy_cost)
+		source.use_energy(energy_cost)
 	first_play_free = false
 
 func on_played(source: Player, targets: Array[Node]) -> void:

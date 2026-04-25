@@ -44,13 +44,6 @@ extends Node
 	#COLORLESS = 0b100000, # 无色
 #}
 ## 遗物类型
-#enum RelicType{
-	#STARTER_RELIC = 0b0001,
-	#NORMAL_RELIC = 0b0010,
-	#ANCIENT_RELIC = 0b0100,
-	#SHOP_RELIC = 0b1000
-#}
-## 遗物所属池子
 #enum COLOR {
 	#RED = 0b0000001,	# 铁甲战士
 	#GREEN = 0b0000010,	# 静默猎手
@@ -61,10 +54,12 @@ extends Node
 #}
 ## 遗物稀有度
 #enum Rarity{
-	#COMMON = 0b0001,
-	#UNCOMMON = 0b0010,
-	#RARE = 0b0100,
-	#STARTER_RELIC = 0b1000
+	#COMMON = 0b000001,
+	#UNCOMMON = 0b000010,
+	#RARE = 0b000100,
+	#STARTER_RELIC = 0b001000,
+	#SHOP_RELIC = 0b010000,
+	#ANCIENT_RELIC = 0b100000,
 #}
 
 var cards_by_color := {
@@ -135,18 +130,13 @@ var relics_by_color := {
 	0b100000: [],
 }
 
-var relics_by_type := {
-	0b0001: [],
-	0b0010: [],
-	0b0100: [],
-	0b1000: [],
-}
-
 var relics_by_rarity := {
-	0b0001: [],
-	0b0010: [],
-	0b0100: [],
-	0b1000: []
+	0b000001: [],
+	0b000010: [],
+	0b000100: [],
+	0b001000: [],
+	0b010000: [],
+	0b100000: [],
 }
 
 var card_color_mask: int = 0b1111111
@@ -244,16 +234,9 @@ func get_relics_by_color(mask: int) -> Array[Relic]:
 	var ret : Array[Relic] = []
 	for key in relics_by_color:
 		if key & mask != 0:
-			ret.append_array(relics_by_type[key])
+			ret.append_array(relics_by_color[key])
 	return ret
 
-func get_relics_by_type(mask: int) -> Array[Relic]:
-	var ret: Array[Relic] = []
-	for key in relics_by_type:
-		if key & mask != 0:
-			ret.append_array(relics_by_type[key])
-	return ret
-	
 func get_relics_by_rarity(mask: int) -> Array[Relic]:
 	var ret: Array[Relic] = []
 	for key in relics_by_rarity:
@@ -264,14 +247,11 @@ func get_relics_by_rarity(mask: int) -> Array[Relic]:
 func filter_relic_by_color(relics: Array[Relic], mask: int) -> Array[Relic]:
 	return relics.filter(func(relic: Relic): return relic.relic_color & mask != 0)
 
-func filter_relic_by_type(relics: Array[Relic], mask: int) -> Array[Relic]:
-	return relics.filter(func(relic: Relic): return relic.relic_type & mask != 0)
-
 func filter_relic_by_rarity(relics: Array[Relic], mask: int) -> Array[Relic]:
 	return relics.filter(func(relic: Relic): return relic.rarity & mask != 0)
 
-func get_relics(color: int, type: int, rarity: int) -> Array[Relic]:
-	return filter_relic_by_rarity(filter_relic_by_type(get_relics_by_color(color), type), rarity)
+func get_relics(color: int, rarity: int) -> Array[Relic]:
+	return filter_relic_by_rarity(get_relics_by_color(color), rarity)
 
 func load_all_cards(dir_path: String):
 	var paths = FileHelper.get_all_resources_in_directory(dir_path)
@@ -309,5 +289,4 @@ func load_all_relics(dir_path: String):
 			continue
 		else:
 			relics_by_color[resource.relic_color & relic_color_mask].append(resource)
-			relics_by_type[resource.relic_type & relic_type_mask].append(resource)
 			relics_by_rarity[resource.rarity & relic_rarity_mask].append(resource)

@@ -35,14 +35,14 @@ func initialize(stats: CharacterStats) -> void:
 	tween.tween_interval(1.0)
 	tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/癫狂之触.tres")))
 	tween.tween_interval(1.0)
-	tween.tween_callback(func(): run_stats.add_potion(preload("res://entities/potions/液态记忆.tres")))
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/地精之角.tres")))
 	tween.tween_interval(1.0)
-	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://d3a7gl0qcwuho")))
-	#tween.tween_interval(1.0)
-	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://h2lk8mcg6tu5")))
-	#tween.tween_interval(1.0)
-	#tween.tween_callback(func(): run_stats.add_relic(preload("uid://b5niu17o73g0m")))
-	#tween.tween_interval(1.0)
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/波纹水盆.tres")))
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/风箱.tres")))
+	tween.tween_interval(1.0)
+	tween.tween_callback(func(): run_stats.add_relic(preload("res://entities/relics/colorless/弹珠袋.tres")))
+	tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://d3a7gl0qcwuho")))
 	#tween.tween_interval(1.0)
 	#tween.tween_callback(func(): run_stats.remove_relic(preload("uid://h2lk8mcg6tu5")))
@@ -57,6 +57,8 @@ func set_run_stats(new_value:RunStats)->void:
 	if not run_stats.gold_changed.is_connected(_update_gold):
 		run_stats.gold_changed.connect(_update_gold)
 		_update_gold()
+	if not run_stats.relic_added.is_connected(_on_relic_added):
+		run_stats.relic_added.connect(_on_relic_added)
 
 func _set_character_stats(value: CharacterStats) -> void:
 	character_stats = value
@@ -70,3 +72,6 @@ func _update_gold()->void:
 
 func _update_health() -> void:
 	health_label.text = "{0}/{1}".format([character_stats.health, character_stats.max_health])
+
+func _on_relic_added(relic: Relic) -> void:
+	relic.on_picked_up(run_stats, character_stats)
