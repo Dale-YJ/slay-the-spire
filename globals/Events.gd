@@ -29,6 +29,8 @@ signal before_skill_played(skill: Skill)
 signal skill_played(skill: Skill)
 signal skill_aim_started(skill_ui: MainSkillUI)
 signal skill_aim_ended(skill_ui: MainSkillUI)
+## 遗物相关
+signal ancient_relic_selected(relic: Relic)
 ## 玩家相关
 # 玩家回合开始抽牌后
 signal player_hand_drawn
@@ -55,6 +57,7 @@ signal combat_reward_exited
 signal treasure_room_exited
 signal incident_exited
 signal map_exited
+signal ancient_exited
 # 给遗物使用
 signal shop_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
 signal campfire_entered(room: Room, run_stats: RunStats, char_stats: CharacterStats)
