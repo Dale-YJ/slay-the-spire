@@ -164,7 +164,8 @@ func _spawn_room(room: Room) -> void:
 	_connect_lines(room)
 	
 	if room.selected and room.row < run_stats.floors_climbed:
-		new_map_room.show_selected()
+		if room.type != Room.Type.ANCIENT and room.type != Room.Type.BOSS:
+			new_map_room.show_selected()
 		
 	new_map_room.original_scale = new_map_room.scale
 		

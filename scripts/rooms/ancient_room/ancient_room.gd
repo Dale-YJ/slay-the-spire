@@ -47,7 +47,7 @@ func _ready() -> void:
 func _create_dialogue_ui() -> void:
 	dialogue_container = HBoxContainer.new()
 	dialogue_container.position = Vector2(700, 650)   # 指定位置
-	dialogue_container.custom_minimum_size.x = 500    # 限制宽度，自动换行
+	dialogue_container.custom_minimum_size.x = 700    # 限制宽度，自动换行
 	dialogue_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	dialogue_container.z_index = 10
 	add_child(dialogue_container)
@@ -61,6 +61,7 @@ func _create_dialogue_ui() -> void:
 	dialogue_container.add_child(neow_icon)
 
 	dialogue_label = RichTextLabel.new()
+	dialogue_label.add_theme_font_size_override("normal_font_size", 24)  
 	dialogue_label.bbcode_enabled = true
 	dialogue_label.scroll_active = false
 	dialogue_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

@@ -5,14 +5,9 @@
 [ext_resource type="Script" uid="uid://dtok21t0ujjui" path="res://scripts/costum_resources/numeric_provider.gd" id="2_gt0w0"]
 [ext_resource type="Texture2D" uid="uid://cl6hb7j" path="res://images/atlases/card_atlas.sprites/ironclad/headbutt.tres" id="2_ocxdh"]
 [ext_resource type="Script" uid="uid://vkklgv0ma0yf" path="res://scripts/costum_resources/effects/attack_effect.gd" id="4_bf4l0"]
-<<<<<<< HEAD
 [ext_resource type="AudioStream" uid="uid://b4eqc65cqogm6" path="res://audio/SFX/blunt_attack.mp3" id="4_ocxdh"]
-[ext_resource type="Script" uid="uid://mj4ouyjcdv4v" path="res://scripts/costum_resources/effects/choose_card_effect.gd" id="5_4afoc"]
-=======
-[ext_resource type="AudioStream" uid="uid://bcwmh6adledx" path="res://audio/SFX/blunt_attack.mp3" id="4_ocxdh"]
 [ext_resource type="Script" uid="uid://cqcf6adphkjfy" path="res://scripts/costum_resources/effects/select_card_effect.gd" id="5_lts0g"]
 [ext_resource type="Script" uid="uid://csyjq6ujulplm" path="res://scripts/costum_resources/effects/card_effects/card_effect.gd" id="6_8pqqb"]
->>>>>>> 9a7f11eee5fb6efad8567b78814b06ef8a0a9af3
 [ext_resource type="Script" uid="uid://br1hibx18tv13" path="res://scripts/costum_resources/card.gd" id="7_gt0w0"]
 [ext_resource type="Script" uid="uid://dl6g3g7ag1dpg" path="res://scripts/costum_resources/effects/card_effects/put_card_to_pile_effect.gd" id="7_yofp3"]
 [ext_resource type="Script" uid="uid://c2drp2mlr0vhm" path="res://scripts/costum_resources/effects/foreach_card_effect.gd" id="8_2rnwj"]

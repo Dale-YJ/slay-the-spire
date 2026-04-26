@@ -54,7 +54,6 @@ func set_room(new_data: Room) -> void:
 	sprite_2d.scale = ICONS[room.type][1]
 	original_scale = scale
 
-<<<<<<< HEAD
 	# 古代房始终保持完全不透明
 	if room.type == Room.Type.ANCIENT:
 		target_alpha = 1.0
@@ -62,11 +61,6 @@ func set_room(new_data: Room) -> void:
 	else:
 		target_alpha = 0.6
 		sprite_2d.modulate.a = target_alpha
-=======
-func show_selected() -> void:
-	Select_Circle.modulate = Color.BLACK
-	sprite_2d.modulate.a = 1.0           # 选中后完全不透明	
->>>>>>> 9a7f11eee5fb6efad8567b78814b06ef8a0a9af3
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if not available or not event.is_action_pressed("left_mouse"):
@@ -106,3 +100,28 @@ func set_highlight(highlight: bool):
 		modulate = Color.WHITE
 		scale = original_scale
 		highlight_sprite.modulate.a = 0.0
+
+
+func show_selected() -> void:
+	# 如果节点还未初始化，直接返回
+	if not sprite_2d:
+		return
+	
+	# 图标完全不透明
+	sprite_2d.modulate.a = 1.0
+	target_alpha = 1.0
+	
+	# 古代房和 Boss 房不显示 Select_Circle（保持透明）
+	if room.type == Room.Type.ANCIENT or room.type == Room.Type.BOSS:
+		Select_Circle.modulate.a = 0.0
+		for child in Select_Circle.get_children():
+			child.modulate.a = 0.0
+	else:
+		# 其他房间显示圆圈
+		Select_Circle.modulate.a = 1.0
+		for child in Select_Circle.get_children():
+			child.modulate.a = 1.0
+	
+	# 停止可能残余的动画
+	if animation_player and animation_player.is_playing():
+		animation_player.stop()

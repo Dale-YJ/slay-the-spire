@@ -146,9 +146,10 @@ metadata/_edit_lock_ = true
 [node name="SpineBoneNode" type="SpineBoneNode" parent="SpineSprite" unique_id=1310767612]
 bone_name = "eye a 1"
 show_behind_parent = true
-position = Vector2(2633.8533, 834.50256)
-rotation = 0.015337119
-scale = Vector2(0.90057474, 0.9003206)
+position = Vector2(2633.2861, 832.674)
+rotation = 0.019418769
+scale = Vector2(0.90142363, 0.9008088)
+skew = 2.6464462e-05
 
 [node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode" unique_id=1399388701]
 show_behind_parent = true
@@ -171,9 +172,10 @@ color_ramp = SubResource("Gradient_vwgt8")
 [node name="SpineBoneNode2" type="SpineBoneNode" parent="SpineSprite" unique_id=968764]
 bone_name = "eye b 1"
 show_behind_parent = true
-position = Vector2(2768.0156, 921.54034)
-rotation = 0.015337119
-scale = Vector2(0.90057474, 0.9003206)
+position = Vector2(2767.6672, 920.3144)
+rotation = 0.019418769
+scale = Vector2(0.90142363, 0.9008088)
+skew = 2.6464462e-05
 
 [node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode2" unique_id=398644402]
 show_behind_parent = true
@@ -196,9 +198,10 @@ color_ramp = SubResource("Gradient_vwgt8")
 [node name="SpineBoneNode3" type="SpineBoneNode" parent="SpineSprite" unique_id=1361686578]
 bone_name = "eye c 1"
 show_behind_parent = true
-position = Vector2(2892.4253, 995.6325)
-rotation = 0.015337119
-scale = Vector2(0.90057474, 0.9003206)
+position = Vector2(2892.2712, 994.96136)
+rotation = 0.019418769
+scale = Vector2(0.90142363, 0.9008088)
+skew = 2.6464462e-05
 
 [node name="light4" type="CPUParticles2D" parent="SpineSprite/SpineBoneNode3" unique_id=418971897]
 show_behind_parent = true
