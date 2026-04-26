@@ -39,16 +39,6 @@ var save_data: SaveGame
 
 var loading_status: int = 0
 
-# 问号房概率配置
-var unknown_room_probs = {
-	"combat": 0.10,      # 战斗
-	"shop": 0.02,        # 商人
-	"treasure": 0.03,    # 宝箱
-	"incident": 0.85     # 事件
-}
-var last_unknown_room_type: String = ""
-var compensation_chance: float = 0.0
-
 func _ready() -> void:
 	if not run_startup:
 		return
@@ -85,9 +75,11 @@ func _on_map_room_selected(room: Room) -> void:
 			_on_campfire_room_entered(room)
 			return
 		Room.Type.UNKNOWN:
-			_handle_unknown_room(scene,room)
+			_handle_unknown_room(room)
 			Events.unknown_room_entered.emit(room, stats, character)
 			return
+		Room.Type.ANCIENT:
+			_on_ancient_room_entered(room)
 		_:
 			return
 
@@ -109,7 +101,7 @@ var unknown_room_probs = {
 var last_unknown_room_type: String = ""
 var compensation_chance: float = 0.0  # 补偿概率
 
-func _handle_unknown_room(scene: PackedScene, room: Room) -> void:
+func _handle_unknown_room(room: Room) -> void:
 	# 1. 计算当前概率（考虑补偿机制）
 	var current_probs = calculate_compensated_probabilities()
 	var room_type = get_random_room_type(current_probs)
@@ -310,19 +302,6 @@ func _on_combat_room_entered(room: Room = null) -> void:
 	battle_scene.relics = top_bar.relic_handler
 	battle_scene.start_combat()
 
-func _on_campfire_room_entered(room: Room) -> void:
-	var campfire_scene: CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
-	campfire_scene.char_stats = character
-	campfire_scene.deck_view = select_deck_view
-	campfire_scene.initialize()
-
-func _on_incident_room_entered(room: Room) -> void:
-	var incident_scene: IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
-	incident_scene.char_stats = character
-	incident_scene.run_stats = stats
-	incident_scene.deck_view = select_deck_view
-	incident_scene.init()
-
 func _on_shop_room_entered(room: Room) -> void:
 	await _change_view(SHOP_SCENE)
 
@@ -334,6 +313,7 @@ func _on_ancient_room_entered(room: Room) -> void:
 
 func _on_ancient_relic_selected(relic: Relic) -> void:
 	top_bar.relic_handler.add_relic(relic)
+	
 func _on_campfire_room_entered(room: Room)-> void:
 	var capfire_scene :CampfireRoom = _change_view(CAMPFIRE_SCENE) as CampfireRoom
 	capfire_scene.char_stats=character
@@ -341,7 +321,6 @@ func _on_campfire_room_entered(room: Room)-> void:
 	capfire_scene.initialize()
 	Events.campfire_entered.emit(room, stats, character)
 
-	
 func _on_incident_room_entered(room: Room)->void:
 	
 	var incident_scene :IncidentRoom = _change_view(INCIDENT_SCENE) as IncidentRoom
