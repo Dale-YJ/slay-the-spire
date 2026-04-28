@@ -159,6 +159,7 @@ func _show_card_rewards(context: RewardContext)->void:
 						
 			card_reward_array.append(picked_card)
 	elif context.all_common:
+		_modify_weights(Card.Rarity.RARE)
 		for i in run_stats.card_rewards:
 			var picked_card:=_get_random_available_card(available_cards, Card.Rarity.COMMON).duplicate()
 			available_cards.erase(picked_card)
@@ -174,8 +175,7 @@ func _show_card_rewards(context: RewardContext)->void:
 					if context.upgrade_all or context.upgrade_power:
 						picked_card.upgrade()
 						
-			card_reward_array.append(picked_card)
-			
+			card_reward_array.append(picked_card)	
 	else:	
 		for i in run_stats.card_rewards:
 			_setup_card_chances()
